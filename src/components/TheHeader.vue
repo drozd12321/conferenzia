@@ -42,7 +42,7 @@ div {
 }
 .h1 {
   grid-area: h1;
-  color: var(--head-color);
+  color: var(--act);
   font-size: 27px;
 }
 .one {

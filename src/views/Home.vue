@@ -136,4 +136,7 @@ img {
   background-color: rgb(255, 2, 2);
   border-radius: 50%;
 }
+.point.active {
+  transform: scale(2.5);
+}
 </style>

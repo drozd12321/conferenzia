@@ -29,6 +29,8 @@ header {
   color: var(--act);
   grid-template-areas: "h1. . glavn  . . one two three";
   align-items: center;
+  position: sticky;
+  top: 0;
 }
 
 div {

@@ -1,7 +1,15 @@
+:root {
+  --head-color: #ffffff;
+  --content-color: #e0e0e0;
+  --act: #1e88e5;
+  --fonHeadr: #1d1d1d;
+  --fonAll: #121212;
+  --contentfon: #1e1e1e;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background-color: rgb(255, 255, 255);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  background-color: var(--fonAll);
+  color: var(--content-color);
 }

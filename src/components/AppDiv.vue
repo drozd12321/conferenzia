@@ -1,13 +1,14 @@
 <template>
-  <AppDiv title="Home">
-    <div class="ff">
-      <h1>ddd</h1>
-      <p>sdsd</p>
-    </div>
-  </AppDiv>
+  <div class="all">
+    <h1>{{ title }}</h1>
+    <slot />
+  </div>
 </template>
 <script setup>
-import AppDiv from "@/components/AppDiv.vue";
+import { defineProps } from "vue";
+const props = defineProps({
+  title: String,
+});
 </script>
 <style scoped>
 .all {
@@ -17,9 +18,7 @@ import AppDiv from "@/components/AppDiv.vue";
   border-radius: 5px; /* Добавляет скругленные углы */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
-.ff {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+h1 {
+  text-align: center;
 }
 </style>

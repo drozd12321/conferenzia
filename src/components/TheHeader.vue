@@ -1,5 +1,6 @@
 <template>
   <header>
+    <h1 class="h1">Моя система</h1>
     <div class="glavn">
       <router-link to="/"><span>Главная</span></router-link>
     </div>
@@ -15,36 +16,45 @@
   </header>
 </template>
 <script setup>
-import { computed } from "vue";
 import { useRoute } from "vue-router";
 const route = useRoute();
 </script>
 <style scoped>
 header {
-  background-color: rgb(48, 83, 240);
+  background-color: var(--fonHeadr);
   font-size: 20px;
   padding: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  color: white;
   display: grid;
-  grid-template-areas: "glavn . . . . one two three";
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  color: var(--act);
+  grid-template-areas: "h1. . glavn  . . one two three";
+  align-items: center;
 }
+
 div {
   transition: all 0.4s ease;
   cursor: pointer;
   height: 100%;
+  display: flex;
+  align-items: center;
+}
+.h1 {
+  grid-area: h1;
+  color: var(--head-color);
+  font-size: 27px;
 }
 .one {
   grid-area: one;
 }
+
 .two {
   grid-area: two;
 }
+
 .three {
   grid-area: three;
 }
+
 .glavn {
   grid-area: glavn;
 }
@@ -52,13 +62,15 @@ div {
 div:hover {
   transform: translateY(-10px);
 }
+
 a {
   text-decoration: none;
-  color: white;
+  color: var(--act);
   padding: 3px;
 }
-.active {
-  border-bottom: 2px solid rgb(156, 153, 153);
-  color: rgb(156, 153, 153);
+
+a.active {
+  border-bottom: 3px solid var(--act);
+  color: var(--act);
 }
 </style>

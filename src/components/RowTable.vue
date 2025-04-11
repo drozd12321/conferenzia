@@ -4,7 +4,6 @@
     :class="{ active: subValue === sub }"
     @mouseleave="$emit('update:subValue', null)"
     @mouseenter="$emit('update:subValue', sub)"
-    @click="$emit('updateVal', sub)"
   >
     <span>{{ sub }}</span>
     <span>{{ znach }}</span>
@@ -27,6 +26,7 @@ const emit = defineEmits(["hover", "update:subValue", "updateVal"]);
   gap: 10px;
   transition: all 0.4s ease;
   border-right: 5px solid transparent;
+  cursor: pointer;
 }
 .row:hover {
   transform: scale(1.1);

@@ -9,6 +9,11 @@
             <span>Значение</span>
           </div>
           <RowTable
+            v-for="item in data"
+            :sub="item[0]"
+            v-model:subValue="item[0]"
+          />
+          <!-- <RowTable
             sub="Великий Новгород"
             znach="10"
             v-model:subValue="activeCity"
@@ -23,7 +28,7 @@
             sub="Нижний Новгород"
             znach="10"
             v-model:subValue="activeCity"
-          />
+          /> -->
         </div>
       </div>
     </div>

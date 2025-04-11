@@ -1,6 +1,8 @@
 <template>
   <AppDiv title="Состояние протестных настроений в субъектах РФ">
-    <div class="inf">
+    <ExelImport @handleFileUpload="handleFileUpload" />
+    <ErrorMsg v-if="errormsg" :errormsg="errormsg" />
+    <div class="inf" v-else>
       <div class="ff">
         <div class="item">
           <h2>Информаци</h2>
@@ -13,6 +15,7 @@
               sub="Великий Новгород"
               znach="10"
               v-model:subValue="activeCity"
+              @updateVal="setAct"
             />
             <RowTable sub="Москва" znach="10" v-model:subValue="activeCity" />
             <RowTable
@@ -28,38 +31,57 @@
           </div>
         </div>
       </div>
-      <div class="map-wrap">
-        <img class="map-image" src="../../public/2.jpg" />
-        <div
-          class="point"
-          :class="{ active: activeCity == 'Великий Новгород' }"
-          style="left: 20%; top: 50%"
-        ></div>
-        <div
-          class="point"
-          :class="{ active: activeCity == 'Москва' }"
-          style="left: 50%; top: 56%"
-        ></div>
-        <div
-          class="point"
-          :class="{ active: activeCity == 'Санкт-Петербург' }"
-          style="left: 70%; top: 80%"
-        ></div>
-        <div
-          class="point"
-          :class="{ active: activeCity == 'Нижний Новгород' }"
-          style="left: 40%; top: 75%"
-        ></div>
-      </div>
+      <CardRussia :activeCity="activeCity" v-model:subValue="activeCity" />
     </div>
   </AppDiv>
 </template>
 
 <script setup>
 import AppDiv from "@/components/AppDiv.vue";
+import CardRussia from "@/components/CardRussia.vue";
+import ErrorMsg from "@/components/ErrorMsg.vue";
+import ExelImport from "@/components/ExelImport.vue";
 import RowTable from "@/components/RowTable.vue";
 import { ref } from "vue";
 const activeCity = ref(null);
+import * as XLSX from "xlsx";
+const isloading = ref(false);
+const errormsg = ref(null);
+const headers = ref([]);
+const dating = ref([]);
+const handleFileUpload = async (file) => {
+  isloading.value = true;
+  errormsg.value = null;
+  try {
+    if (!file) {
+      throw new Error("Файл не выбран");
+    }
+    const arrdata = await file.arrayBuffer();
+    const workdook = XLSX.read(arrdata, { type: "array" });
+
+    if (workdook.SheetNames.length === 0) {
+      throw new Error("Файл не содержит листов");
+    }
+    const firstSheetName = workdook.SheetNames[0];
+    const worksheet = workdook.Sheets[firstSheetName];
+    const jsonData = XLSX.utils.sheet_to_json(worksheet);
+    if (jsonData.length === 0) {
+      throw new Error("Нет данных в файле");
+    }
+    headers.value = Object.keys(jsonData[0]);
+    dating.value = jsonData;
+  } catch (error) {
+    console.error(error, "Ошибка при загрузке данных");
+    errormsg.value = `Ошибка: ${error.message}`;
+    dating.value = [];
+  } finally {
+    isloading.value = false;
+  }
+};
+const setAct = (name) => {
+  console.log(name);
+  activeCity.value = name;
+};
 </script>
 
 <style scoped>
@@ -73,7 +95,6 @@ const activeCity = ref(null);
   border: 3px solid var(--act);
   border-radius: 3px;
 }
-
 .head {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -85,9 +106,7 @@ const activeCity = ref(null);
 h2 {
   font-size: 35px;
 }
-.point:hover {
-  transform: scale(2.3);
-}
+
 .ff {
   flex: 0.3;
 }
@@ -101,42 +120,14 @@ h2 {
 p {
   font-size: 20px;
 }
-img {
-  border-radius: 10px;
-}
+
 .inf {
   display: flex;
   gap: 10px;
 }
-
 .item {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.map-wrap {
-  position: relative;
-  width: 100%;
-  height: 600px;
-  display: flex;
-  flex: 0.7;
-}
-
-.map-wrap .map-image {
-  width: 100%;
-  height: 100%;
-}
-
-.point {
-  transition: all 0.4s ease;
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: rgb(255, 2, 2);
-  border-radius: 50%;
-}
-.point.active {
-  transform: scale(2.5);
 }
 </style>

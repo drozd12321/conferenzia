@@ -1,8 +1,10 @@
 <template>
   <div
     class="row"
+    :class="{ active: subValue === sub }"
     @mouseleave="$emit('update:subValue', null)"
     @mouseenter="$emit('update:subValue', sub)"
+    @click="$emit('updateVal', sub)"
   >
     <span>{{ sub }}</span>
     <span>{{ znach }}</span>
@@ -13,8 +15,9 @@ import { defineProps } from "vue";
 const props = defineProps({
   sub: String,
   znach: String,
+  subValue: String,
 });
-const emit = defineEmits(["hover", "update:subValue"]);
+const emit = defineEmits(["hover", "update:subValue", "updateVal"]);
 </script>
 <style scoped>
 .row {
@@ -23,9 +26,13 @@ const emit = defineEmits(["hover", "update:subValue"]);
   padding: 10px;
   gap: 10px;
   transition: all 0.4s ease;
-  border-right: 5px soliв transparent;
+  border-right: 5px solid transparent;
 }
 .row:hover {
+  transform: scale(1.1);
+  color: var(--act);
+}
+.row.active {
   transform: scale(1.1);
   color: var(--act);
 }

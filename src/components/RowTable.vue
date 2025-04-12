@@ -1,7 +1,7 @@
 <template>
   <div
     class="row"
-    :class="{ active: subValue === sub }"
+    :class="{ active: active }"
     @mouseleave="$emit('update:subValue', null)"
     @mouseenter="$emit('update:subValue', sub)"
   >
@@ -15,8 +15,9 @@ const props = defineProps({
   sub: String,
   znach: String,
   subValue: String,
+  active: Boolean,
 });
-const emit = defineEmits(["update:subValue", "updateVal"]);
+const emit = defineEmits(["update:subValue", "updateVal", "hover", "leave"]);
 </script>
 <style scoped>
 .row {

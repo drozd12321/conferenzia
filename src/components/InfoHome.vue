@@ -8,35 +8,30 @@
             <span>Cубьект</span>
             <span>Значение</span>
           </div>
-          <!-- <RowTable
-            v-for="item in data[0]"
-            :sub="item"
-            v-model:subValue="item[0]"
-          /> -->
           <div v-for="(cityData, cityName) in data" :key="cityName">
             <RowTable
               :sub="cityName"
               :subValue="cityName"
-              @update:subValue="handleActivCity"
+              :active="activeEl === cityName"
+              @update:subValue="handleActiv"
             />
           </div>
         </div>
       </div>
     </div>
-    <CardRussia :activeCity="activeCity" v-model:subValue="activeCity" />
+    <CardRussia :activeCity="activeEl" @hover="handleActiv" />
   </div>
-  {{ data }}
 </template>
 <script setup>
 import { ref } from "vue";
 import CardRussia from "./CardRussia.vue";
 import RowTable from "./RowTable.vue";
-const activeCity = ref(null);
+const activeEl = ref(null);
 const props = defineProps({
   data: Object,
 });
-const handleActivCity = (city) => {
-  activeCity.value = city;
+const handleActiv = (city) => {
+  activeEl.value = city;
 };
 </script>
 <style scoped>

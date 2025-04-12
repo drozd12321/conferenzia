@@ -2,32 +2,13 @@
   <div class="map-wrap">
     <img class="map-image" src="../../public/2.jpg" />
     <div
+      v-for="(position, cityName) in citiesPositions"
+      :key="cityName"
       class="point"
-      :class="{ active: activeCity == 'Великий Новгород' }"
-      style="left: 20%; top: 50%"
+      :class="{ active: activeCity === cityName }"
+      :style="{ left: position.left, top: position.top }"
       @mouseleave="resetActivCity()"
-      @mouseenter="setActivCity('Великий Новгород')"
-    ></div>
-    <div
-      class="point"
-      :class="{ active: activeCity == 'Москва' }"
-      style="left: 50%; top: 56%"
-      @mouseleave="resetActivCity()"
-      @mouseenter="setActivCity('Москва')"
-    ></div>
-    <div
-      class="point"
-      :class="{ active: activeCity == 'Санкт-Петербург' }"
-      style="left: 70%; top: 80%"
-      @mouseleave="resetActivCity()"
-      @mouseenter="setActivCity('Санкт-Петербург')"
-    ></div>
-    <div
-      class="point"
-      :class="{ active: activeCity == 'Нижний Новгород' }"
-      style="left: 40%; top: 75%"
-      @mouseleave="resetActivCity()"
-      @mouseenter="setActivCity('Нижний Новгород')"
+      @mouseenter="setActivCity(cityName)"
     ></div>
   </div>
 </template>
@@ -39,12 +20,18 @@ const props = defineProps({
 });
 const emit = defineEmits(["hover", "update:subValue"]);
 const setActivCity = (city) => {
-  emit("update:subValue", city);
+  emit("hover", city);
 };
 const resetActivCity = () => {
-  emit("update:subValue", null);
+  emit("hover", null);
 };
 const { data } = inject("data");
+const citiesPositions = {
+  "Великий Новгород": { left: "20%", top: "50%" },
+  Москва: { left: "50%", top: "56%" },
+  "Санкт-Петербург": { left: "70%", top: "80%" },
+  "Нижний Новгород": { left: "40%", top: "75%" },
+};
 </script>
 <style scoped>
 .map-wrap {

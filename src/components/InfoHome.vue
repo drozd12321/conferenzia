@@ -21,11 +21,16 @@
     </div>
     <CardRussia :activeCity="activeEl" @hover="handleActiv" />
   </div>
+  {{ getData }}
 </template>
 <script setup>
 import { ref } from "vue";
 import CardRussia from "./CardRussia.vue";
 import RowTable from "./RowTable.vue";
+import useDataStore from "@/store/useDataStore";
+import { storeToRefs } from "pinia";
+const store = useDataStore();
+const { alldata, getData } = storeToRefs(store);
 const activeEl = ref(null);
 const props = defineProps({
   data: Object,

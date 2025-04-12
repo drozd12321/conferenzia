@@ -14,7 +14,7 @@
 </template>
 <script setup>
 import { inject } from "vue";
-
+import citiesPositions from "@/data/citiesposition";
 const props = defineProps({
   activeCity: String,
 });
@@ -26,12 +26,6 @@ const resetActivCity = () => {
   emit("hover", null);
 };
 const { data } = inject("data");
-const citiesPositions = {
-  "Великий Новгород": { left: "20%", top: "50%" },
-  Москва: { left: "50%", top: "56%" },
-  "Санкт-Петербург": { left: "70%", top: "80%" },
-  "Нижний Новгород": { left: "40%", top: "75%" },
-};
 </script>
 <style scoped>
 .map-wrap {

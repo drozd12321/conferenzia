@@ -80,12 +80,12 @@ const emitFile = async (event) => {
 .file-upload__button:hover {
   background-color: var(--act-dark);
   transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(216, 211, 211, 0.226);
 }
 
 .file-upload__button:active {
   transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgb(116, 113, 113);
 }
 
 .file-upload__filename {

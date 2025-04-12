@@ -30,11 +30,11 @@ const emit = defineEmits(["update:subValue", "updateVal", "hover", "leave"]);
   cursor: pointer;
 }
 .row:hover {
-  transform: scale(1.1);
+  transform: translateY(-2px);
   color: var(--act);
 }
 .row.active {
-  transform: scale(1.1);
+  transform: translateY(-2px);
   color: var(--act);
 }
 </style>

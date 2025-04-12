@@ -1,6 +1,8 @@
 <template>
   <AppDiv title="Состояние протестных настроений в субъектах РФ">
-    <ExelImport @handleFileUpload="handleFileChange" />
+    <template #exel>
+      <ExelImport @handleFileUpload="handleFileChange" />
+    </template>
     <ErrorMsg v-if="errorMsg" :errormsg="errorMsg" />
     <div v-if="isLoading">Загрузка ...</div>
     <InfoHome :data="data" />

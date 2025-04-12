@@ -1,6 +1,9 @@
 <template>
   <div class="all">
-    <h1>{{ title }}</h1>
+    <div class="h1">
+      <h1>{{ title }}</h1>
+      <slot name="exel" />
+    </div>
     <slot />
   </div>
 </template>
@@ -20,5 +23,10 @@ const props = defineProps({
 }
 h1 {
   text-align: center;
+  color: var(--content-color);
+}
+.h1 {
+  display: flex;
+  justify-content: space-around;
 }
 </style>

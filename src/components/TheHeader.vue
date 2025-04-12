@@ -60,19 +60,17 @@ div {
 .glavn {
   grid-area: glavn;
 }
-
 div:hover {
   transform: translateY(-10px);
+  color: var(--act-dark);
 }
-
 a {
   text-decoration: none;
   color: var(--act);
   padding: 3px;
 }
-
 a.active {
   border-bottom: 3px solid var(--act);
-  color: var(--act);
+  color: var(--content-color);
 }
 </style>

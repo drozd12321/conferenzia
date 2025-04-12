@@ -42,7 +42,7 @@ const handleActiv = (city) => {
   text-align: center;
   font-size: 19px;
   gap: 10px;
-  border: 3px solid var(--act);
+  border: 2px solid var(--content-color);
   border-radius: 3px;
 }
 .head {
@@ -51,7 +51,7 @@ const handleActiv = (city) => {
   padding: 10px;
   font-size: 25px;
   font-weight: 600;
-  border-bottom: 3px solid var(--act);
+  border-bottom: 3px solid var(--content-color);
 }
 h2 {
   font-size: 35px;

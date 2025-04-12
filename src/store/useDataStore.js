@@ -5,6 +5,11 @@ const useDataStore = defineStore("data", () => {
   const getData = computed(() => {
     return alldata;
   });
-  return { alldata, getData };
+  function addData(key, val) {
+    if (!alldata[key]) {
+      alldata[key] = val;
+    }
+  }
+  return { alldata, getData, addData };
 });
 export default useDataStore;

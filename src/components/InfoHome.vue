@@ -21,6 +21,7 @@
     </div>
     <CardRussia :activeCity="activeEl" @hover="handleActiv" />
   </div>
+  <button @click="dd">Добавить</button>
   {{ getData }}
 </template>
 <script setup>
@@ -32,6 +33,10 @@ import { storeToRefs } from "pinia";
 const store = useDataStore();
 const { alldata, getData } = storeToRefs(store);
 const activeEl = ref(null);
+function dd() {
+  store.addData("d", 4);
+  console.log(getData);
+}
 const props = defineProps({
   data: Object,
 });

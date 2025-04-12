@@ -1,51 +1,67 @@
 import { ref } from "vue";
 import * as XLSX from "xlsx";
+
 export default function useFileUpload() {
-  const isloading = ref(false);
-  const errormsg = ref(null);
+  const isLoading = ref(false);
+  const errorMsg = ref(null);
   const headers = ref([]);
-  const firstColumn = ref([]);
-  const dating = ref([]);
+  const cities = ref([]);
+  const data = ref({});
+
   const handleFile = async (file) => {
-    dating.value = [];
-    isloading.value = true;
-    errormsg.value = null;
+    data.value = {};
+    isLoading.value = true;
+    errorMsg.value = null;
     try {
       if (!file) {
         throw new Error("Файл не выбран");
       }
-      const arrdata = await file.arrayBuffer();
-      const workdook = XLSX.read(arrdata, { type: "array" });
-      if (workdook.SheetNames.length === 0) {
+      const arrayBuffer = await file.arrayBuffer();
+      const workbook = XLSX.read(arrayBuffer, { type: "array" });
+      if (workbook.SheetNames.length === 0) {
         throw new Error("Файл не содержит листов");
       }
-      const firstSheetName = workdook.SheetNames[0];
-      const worksheet = workdook.Sheets[firstSheetName];
-      const jsonData = XLSX.utils.sheet_to_json(worksheet);
+      const firstSheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[firstSheetName];
+      const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
       if (jsonData.length === 0) {
         throw new Error("Нет данных в файле");
       }
-      const dataWith = jsonData.map((item) => {
-        return Object.values(item);
+      headers.value = jsonData[0];
+      if (jsonData.length < 2) {
+        throw new Error("Нет данных для обработки");
+      }
+      cities.value = jsonData.slice(1).map((row) => row[0]);
+      const result = {};
+      jsonData.slice(1).forEach((row) => {
+        const cityName = row[0];
+        if (!result[cityName]) {
+          result[cityName] = [];
+        }
+        const indicators = {};
+
+        for (let i = 1; i < headers.value.length; i++) {
+          const header = headers.value[i];
+          indicators[header] = row[i] || null;
+        }
+        result[cityName].push(indicators);
       });
-      firstColumn.value = jsonData.map((item) => item[Object.keys(item)[0]]);
-      headers.value = Object.keys(jsonData[0]);
-      dating.value.push(firstColumn.value);
-      dating.value.push(headers.value);
-      dating.value.push(dataWith);
+
+      data.value = result;
     } catch (error) {
-      console.error(error, "Ошибка при загрузке данных");
-      errormsg.value = `Ошибка: ${error.message}`;
-      dating.value = [];
+      console.error("Ошибка при загрузке данных:", error);
+      errorMsg.value = `Ошибка: ${error.message}`;
+      data.value = {};
     } finally {
-      isloading.value = false;
+      isLoading.value = false;
     }
   };
   return {
-    isloading,
-    errormsg,
+    isLoading,
+    errorMsg,
     headers,
-    dating,
+    cities,
+    data,
     handleFile,
   };
 }

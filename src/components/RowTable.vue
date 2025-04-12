@@ -16,7 +16,7 @@ const props = defineProps({
   znach: String,
   subValue: String,
 });
-const emit = defineEmits(["hover", "update:subValue", "updateVal"]);
+const emit = defineEmits(["update:subValue", "updateVal"]);
 </script>
 <style scoped>
 .row {

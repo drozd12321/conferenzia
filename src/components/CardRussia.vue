@@ -32,6 +32,8 @@
   </div>
 </template>
 <script setup>
+import { inject } from "vue";
+
 const props = defineProps({
   activeCity: String,
 });
@@ -42,6 +44,7 @@ const setActivCity = (city) => {
 const resetActivCity = () => {
   emit("update:subValue", null);
 };
+const { data } = inject("data");
 </script>
 <style scoped>
 .map-wrap {

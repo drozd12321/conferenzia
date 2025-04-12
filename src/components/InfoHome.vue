@@ -8,27 +8,18 @@
             <span>Cубьект</span>
             <span>Значение</span>
           </div>
-          <RowTable
-            v-for="item in data"
-            :sub="item[0]"
-            v-model:subValue="item[0]"
-          />
           <!-- <RowTable
-            sub="Великий Новгород"
-            znach="10"
-            v-model:subValue="activeCity"
-          />
-          <RowTable sub="Москва" znach="10" v-model:subValue="activeCity" />
-          <RowTable
-            sub="Санкт-Петербург"
-            znach="10"
-            v-model:subValue="activeCity"
-          />
-          <RowTable
-            sub="Нижний Новгород"
-            znach="10"
-            v-model:subValue="activeCity"
+            v-for="item in data[0]"
+            :sub="item"
+            v-model:subValue="item[0]"
           /> -->
+          <div v-for="(cityData, cityName) in data" :key="cityName">
+            <RowTable
+              :sub="cityName"
+              :subValue="cityName"
+              @update:subValue="handleActivCity"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -44,6 +35,9 @@ const activeCity = ref(null);
 const props = defineProps({
   data: Object,
 });
+const handleActivCity = (city) => {
+  activeCity.value = city;
+};
 </script>
 <style scoped>
 .table {

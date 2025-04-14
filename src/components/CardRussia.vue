@@ -4,6 +4,7 @@
       <g transform="scale(0.5176595959595959) translate(0, 41.55999418517301)">
         <path
           v-for="region in regions"
+          :data-tooltip="region.name"
           :key="region.id"
           :d="region.d"
           :stroke-width="region.strokewidth"
@@ -20,19 +21,25 @@
         ></path>
       </g>
     </svg>
-    <div
+    <!-- <div
       v-for="(position, cityName) in citiesPositions"
       :key="cityName"
       class="point"
       :class="{ active: activeCity === cityName }"
       :style="{ left: position.left, top: position.top }"
-      @mouseleave="resetActivCity()"
-      @mouseenter="setActivCity(cityName)"
+      @mouseover="handleShow(cityName, $event)"
+      @mouseout="hideShow()"
     ></div>
+    <div
+      class="tolp"
+      :style="{ left: showRegZnach.x + 'px', top: showRegZnach.y + 'px' }"
+    >
+      {{ showRegZnach }}
+    </div> -->
   </div>
 </template>
 <script setup>
-import { inject, ref } from "vue";
+import { inject, reactive, ref } from "vue";
 import citiesPositions from "@/data/citiesposition";
 import regions from "@/utils/region";
 const props = defineProps({
@@ -47,6 +54,19 @@ const resetActivCity = () => {
 };
 const { data } = inject("data");
 const hoverRegion = ref(null);
+const positionReg = reactive({ x: 0, y: 0 });
+const showReg = ref(false);
+const showRegZnach = ref("");
+const handleShow = (region, event) => {
+  console.log(region);
+  showReg.value = true;
+  showRegZnach.value = region;
+  positionReg.x = event.target.clientX + 10;
+  positionReg.y = event.target.clientY + 10;
+};
+const hideShow = () => {
+  showReg.value = false;
+};
 </script>
 <style scoped>
 .jvectormap-region {
@@ -72,23 +92,38 @@ const hoverRegion = ref(null);
   width: 100%;
   height: auto;
 }
-
-.point {
-  transition: all 0.4s ease;
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: rgb(255, 2, 2);
-  border-radius: 50%;
-}
-.point.active {
-  transform: scale(2.5);
-}
 svg {
   border-radius: 10px;
   width: 100%;
 }
-.point:hover {
-  transform: scale(2.3);
+
+path {
+  position: relative; /* Required for tooltip positioning */
+}
+
+path:hover {
+  fill: #ff0000; /* Change color on hover, example */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+path::before {
+  content: attr(data-tooltip); /* Get tooltip text from attribute */
+  position: absolute;
+  bottom: 20px; /* Adjust position */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 1; /* Ensure tooltip is above other elements */
+}
+
+path:hover::before {
+  opacity: 1; /* Show tooltip on hover */
 }
 </style>

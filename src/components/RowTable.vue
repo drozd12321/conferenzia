@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="!!subValue"
     class="row"
     :class="{ active: active }"
     @mouseleave="$emit('update:subValue', null)"

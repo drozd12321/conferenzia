@@ -61,7 +61,7 @@ div {
   grid-area: glavn;
 }
 div:hover {
-  transform: translateY(-10px);
+  transform: translateY(-5px);
   color: var(--act-dark);
 }
 a {

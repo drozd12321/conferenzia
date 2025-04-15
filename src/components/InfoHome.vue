@@ -2,7 +2,7 @@
   <div class="inf">
     <div class="ff">
       <div class="item">
-        <h2>Информаци</h2>
+        <h2>Информация</h2>
         <div class="table">
           <div class="head">
             <span>Cубьект</span>
@@ -21,8 +21,6 @@
     </div>
     <CardRussia :activeCity="activeEl" @hover="handleActiv" />
   </div>
-  <button @click="dd">Добавить</button>
-  {{ getData }}
 </template>
 <script setup>
 import { ref } from "vue";

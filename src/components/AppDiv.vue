@@ -4,6 +4,7 @@
       <h1>{{ title }}</h1>
       <slot name="exel" />
     </div>
+    <slot name="federal" />
     <slot />
   </div>
 </template>

@@ -10,6 +10,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЮФО",
   },
   {
     name: "Донецкая Народная республика",
@@ -22,6 +23,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЮФО",
   },
   {
     name: "Запорожская область",
@@ -34,6 +36,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЮФО",
   },
   {
     name: "Херсонская область",
@@ -46,6 +49,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЮФО",
   },
   {
     name: "Республика Дагестан",
@@ -58,6 +62,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СКФО",
   },
   {
     name: "Республика Крым и Севастополь",
@@ -70,6 +75,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЮФО",
   },
   {
     name: "Республика Cаха",
@@ -82,6 +88,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ДФО",
   },
   {
     name: "Республика Cеверная Осетия",
@@ -94,6 +101,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СКФО",
   },
   {
     name: "Кабардино-Балкарская Республика",
@@ -106,9 +114,10 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СКФО",
   },
   {
-    name: "Краснодарский Край",
+    name: "Карачево-Черкесская Республика",
     id: "jqvmap1_kc",
     d: "m43.482,361.39,2.2321,8.4821,5.0893,6.25,4.375-2.6786,5.3571-0.89286,0.08929-3.3928,3.75-1.0714-6.6964-7.2321-2.2321,2.4107-2.8571,0.26786-1.6071-4.5536,0.44643-2.1429z",
     stroke: "#ffffff",
@@ -118,6 +127,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СКФО",
   },
   {
     name: "Ставропольский Край",
@@ -130,6 +140,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СКФО",
   },
   {
     name: "Краснодарский Край",
@@ -142,6 +153,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЮФО",
   },
   {
     name: "Ростовская область",
@@ -154,6 +166,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЮФО",
   },
   {
     name: "Республика Калмыкия",
@@ -166,6 +179,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЮФО",
   },
   {
     name: "Астраханская область",
@@ -178,6 +192,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЮФО",
   },
   {
     name: "Республика Адыгея",
@@ -190,6 +205,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЮФО",
   },
   {
     name: "Волгоградская Область",
@@ -202,6 +218,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЮФО",
   },
   {
     name: "Воронежская Область",
@@ -214,6 +231,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Белгородская Область",
@@ -226,6 +244,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Курская Область",
@@ -238,6 +257,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Орловкая Область",
@@ -250,6 +270,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Липецкая Область",
@@ -262,6 +283,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Тульская Область",
@@ -274,6 +296,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Брянская Область",
@@ -286,6 +309,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Калужская Область",
@@ -298,6 +322,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Смоленская Область",
@@ -310,6 +335,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Москва и Московская область",
@@ -322,6 +348,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Рязанская область",
@@ -334,6 +361,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Тамбовкая область",
@@ -346,6 +374,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Калининградская область",
@@ -358,6 +387,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СЗФО",
   },
   {
     name: "Псковкая область",
@@ -370,6 +400,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СЗФО",
   },
   {
     name: "Новгородская область",
@@ -382,6 +413,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СЗФО",
   },
   {
     name: "Тверская область",
@@ -394,6 +426,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Владимирская область",
@@ -406,6 +439,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Пензенская область",
@@ -418,6 +452,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ПФО",
   },
   {
     name: "Саратовская область",
@@ -430,6 +465,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ПФО",
   },
   {
     name: "Республика Мордовия",
@@ -442,6 +478,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ПФО",
   },
   {
     name: "Чувашская республика",
@@ -454,6 +491,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ПФО",
   },
   {
     name: "Ульяновкая область",
@@ -466,6 +504,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ПФО",
   },
   {
     name: "Самарская область",
@@ -478,6 +517,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ПФО",
   },
   {
     name: "Оренбургская область",
@@ -490,6 +530,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ПФО",
   },
   {
     name: "Нижегородская область",
@@ -502,6 +543,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ПФО",
   },
   {
     name: "Респуюлика Марий Эл",
@@ -514,6 +556,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ПФО",
   },
   {
     name: "Респуюлика Татарстан",
@@ -526,6 +569,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ПФО",
   },
   {
     name: "Ивановская область",
@@ -538,6 +582,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Ярославская область",
@@ -550,6 +595,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Костромская область",
@@ -562,6 +608,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ЦФО",
   },
   {
     name: "Санкт-Петербург и Ленинградская область",
@@ -574,6 +621,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СЗФО",
   },
   {
     name: "Кировская область",
@@ -586,6 +634,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ПФО",
   },
   {
     name: "Республика Башкортостан",
@@ -598,6 +647,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ПФО",
   },
   {
     name: "Челябинская область",
@@ -610,6 +660,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "УФО",
   },
   {
     name: "Удмуртская Республика",
@@ -622,6 +673,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ПФО",
   },
   {
     name: "Пермский Край",
@@ -634,6 +686,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ПФО",
   },
   {
     name: "Свердловская область",
@@ -646,6 +699,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "УФО",
   },
   {
     name: "Курганская область",
@@ -658,6 +712,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "УФО",
   },
   {
     name: "Республика Коми",
@@ -670,6 +725,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СЗФО",
   },
   {
     name: "Мурманская область",
@@ -682,6 +738,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СЗФО",
   },
   {
     name: "Республика Карелия",
@@ -694,6 +751,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СЗФО",
   },
   {
     name: "Вологодская область",
@@ -706,6 +764,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СЗФО",
   },
   {
     name: "Архангельская область",
@@ -718,6 +777,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СЗФО",
   },
   {
     name: "Тюменьская область",
@@ -730,6 +790,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "УФО",
   },
   {
     name: "Ненецкий автономный округ",
@@ -742,6 +803,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СЗФО",
   },
   {
     name: "Омская область",
@@ -754,6 +816,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СФО",
   },
   {
     name: "Ханты-Мансийский автономный округ",
@@ -766,6 +829,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "УФО",
   },
   {
     name: "Ямало-Ненецкий автономный округ",
@@ -778,6 +842,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "УФО",
   },
   {
     name: "Красноярский край",
@@ -790,6 +855,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СФО",
   },
   {
     name: "Новосибирская область",
@@ -802,6 +868,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СФО",
   },
   {
     name: "Алтайский край",
@@ -814,6 +881,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СФО",
   },
   {
     name: "Кемеровская область",
@@ -826,6 +894,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СФО",
   },
   {
     name: "Респулика Алтай",
@@ -838,6 +907,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СФО",
   },
   {
     name: "Респулика Тыва",
@@ -850,6 +920,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СФО",
   },
   {
     name: "Респулика Хакасия",
@@ -862,6 +933,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СФО",
   },
   {
     name: "Иркутская область",
@@ -874,6 +946,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СФО",
   },
   {
     name: "Республика Бурятия",
@@ -886,6 +959,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ДФО",
   },
   {
     name: "Забайкальский Край",
@@ -898,6 +972,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ДФО",
   },
   {
     name: "Амурская область",
@@ -910,6 +985,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ДФО",
   },
   {
     name: "Чукотский автономный округ",
@@ -922,6 +998,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ДФО",
   },
   {
     name: "Хабаровский край",
@@ -934,6 +1011,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ДФО",
   },
   {
     name: "Еврейская автономная область",
@@ -946,6 +1024,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ДФО",
   },
   {
     name: "Приморский Край",
@@ -958,6 +1037,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ДФО",
   },
   {
     name: "Магаданская область",
@@ -970,6 +1050,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ДФО",
   },
   {
     name: "Сахалинская область",
@@ -982,6 +1063,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ДФО",
   },
   {
     name: "Камчатский Край",
@@ -994,6 +1076,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "ДФО",
   },
   {
     name: "Республика Ингушетия",
@@ -1006,6 +1089,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СКФО",
   },
   {
     name: "Чеченская Республика",
@@ -1018,6 +1102,7 @@ const regions = [
     strokeopacity: "0.25",
     fill: "#3175b5",
     original: "#3175b5",
+    federalDistrict: "СКФО",
   },
 ];
 export default regions;

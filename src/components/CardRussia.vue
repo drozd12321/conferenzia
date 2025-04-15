@@ -31,7 +31,7 @@
   </div>
 </template>
 <script setup>
-import { inject, reactive, ref } from "vue";
+import { inject, ref } from "vue";
 import regions from "@/utils/region";
 const props = defineProps({
   activeCity: String,

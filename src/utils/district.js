@@ -7,5 +7,6 @@ const district = [
   { name: "УФО", distr: "YFO" },
   { name: "СКФО", distr: "CKFO" },
   { name: "СФО", distr: "CFO" },
+  { name: "Все", distr: "ALLI" },
 ];
 export default district;

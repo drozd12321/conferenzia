@@ -5,7 +5,7 @@
     </template>
     <ErrorMsg v-if="errorMsg" :errormsg="errorMsg" />
     <div v-if="isLoading">Загрузка ...</div>
-    <InfoHome :data="data" />
+    <InfoHome :data="getData" />
     <template #federal>
       <FederalDistrict
         :activDistrict="activDistrict"
@@ -21,16 +21,21 @@ import ExelImport from "@/components/ExelImport.vue";
 import FederalDistrict from "@/components/FederalDistrict.vue";
 import InfoHome from "@/components/InfoHome.vue";
 import useFileUpload from "@/use/useFileUpload";
-import { provide, ref } from "vue";
+import useDataStore from "@/store/useDataStore";
+import { computed, provide, reactive, ref } from "vue";
+import { storeToRefs } from "pinia";
+const dataStore = useDataStore();
 const { data, errorMsg, handleFile, isLoading } = useFileUpload();
+const { getData } = storeToRefs(useDataStore());
 const handleFileChange = async (file) => {
   await handleFile(file);
-  console.log(data);
 };
 const activDistrict = ref("");
 const handleDistrict = (name) => {
   activDistrict.value = name;
+  console.log(getData.value);
 };
+const filtdt = computed(() => getData);
 provide("data", { data });
 </script>
 <style scoped></style>

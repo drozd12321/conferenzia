@@ -1,7 +1,8 @@
 import { ref } from "vue";
 import * as XLSX from "xlsx";
-
+import useDataStore from "@/store/useDataStore";
 export default function useFileUpload() {
+  const dataStore = useDataStore();
   const isLoading = ref(false);
   const errorMsg = ref(null);
   const headers = ref([]);
@@ -48,6 +49,8 @@ export default function useFileUpload() {
       });
 
       data.value = result;
+      dataStore.sentFilterKey();
+      dataStore.loadData(data.value);
     } catch (error) {
       console.error("Ошибка при загрузке данных:", error);
       errorMsg.value = `Ошибка: ${error.message}`;

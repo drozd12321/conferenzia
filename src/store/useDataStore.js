@@ -1,15 +1,21 @@
 import { defineStore } from "pinia";
-import { computed, reactive } from "vue";
+import regions from "@/utils/region";
+import { computed, reactive, ref } from "vue";
+import useFilterDistrict from "@/use/UseFilterDistrict";
 const useDataStore = defineStore("data", () => {
-  const alldata = reactive({ a: 1, v: 2, c: 4 });
+  const alldata = ref();
+
+  const filterkey = ref("Все");
   const getData = computed(() => {
-    return alldata;
+    return alldata.value;
   });
-  function addData(key, val) {
-    if (!alldata[key]) {
-      alldata[key] = val;
-    }
+  function loadData(newData) {
+    alldata.value = newData;
   }
-  return { alldata, getData, addData };
+  function sentFilterKey(key = "Все") {
+    filterkey.value = key;
+    console.log(filterkey);
+  }
+  return { alldata, getData, loadData, sentFilterKey };
 });
 export default useDataStore;

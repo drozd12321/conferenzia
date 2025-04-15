@@ -11,10 +11,10 @@
 </template>
 <script setup>
 import district from "@/utils/district";
-import { ref } from "vue";
 const props = defineProps({
   activDistrict: String,
 });
+
 const emit = defineEmits(["handleDistrict"]);
 const handleDistrict = (name) => {
   emit("handleDistrict", name);
@@ -23,7 +23,7 @@ const handleDistrict = (name) => {
 <style scoped>
 .federal {
   display: grid;
-  grid-template-areas: "ZFO CZFO UFO PFO YFO CFO DFO CKFO";
+  grid-template-areas: "ALLI ZFO CZFO UFO PFO YFO CFO DFO CKFO";
   gap: 10px;
   width: 600px;
   cursor: pointer;
@@ -62,6 +62,10 @@ const handleDistrict = (name) => {
   padding: 10px;
   grid-area: CKFO;
 }
+.ALLI {
+  padding: 10px;
+  grid-area: ALLI;
+}
 .ZFO,
 .CFO,
 .CKFO,
@@ -69,7 +73,8 @@ const handleDistrict = (name) => {
 .DFO,
 .UFO,
 .YFO,
-.PFO {
+.PFO,
+.ALLI {
   transition: all 0.6s ease;
   border-radius: 3px;
 }
@@ -80,7 +85,8 @@ const handleDistrict = (name) => {
 .DFO.active,
 .UFO.active,
 .YFO.active,
-.PFO.active {
+.PFO.active,
+.ALLI.active {
   background-color: var(--act);
 }
 </style>

@@ -15,32 +15,23 @@
           original="#3175b5"
           :id="region.id"
           class="jvectormap-region"
-          @mouseover="hoverRegion = region.name"
-          @mouseleave="hoverRegion = null"
+          @mouseover="showTooltip(region.name, $event)"
+          @mouseleave="hideTooltip"
           :class="{ hovered: hoverRegion === region.name }"
         ></path>
       </g>
     </svg>
-    <!-- <div
-      v-for="(position, cityName) in citiesPositions"
-      :key="cityName"
-      class="point"
-      :class="{ active: activeCity === cityName }"
-      :style="{ left: position.left, top: position.top }"
-      @mouseover="handleShow(cityName, $event)"
-      @mouseout="hideShow()"
-    ></div>
     <div
-      class="tolp"
-      :style="{ left: showRegZnach.x + 'px', top: showRegZnach.y + 'px' }"
+      v-if="tooltip.visible"
+      class="tooltip"
+      :style="{ top: tooltip.y + 'px', left: tooltip.x + 'px' }"
     >
-      {{ showRegZnach }}
-    </div> -->
+      {{ tooltip.text }}
+    </div>
   </div>
 </template>
 <script setup>
 import { inject, reactive, ref } from "vue";
-import citiesPositions from "@/data/citiesposition";
 import regions from "@/utils/region";
 const props = defineProps({
   activeCity: String,
@@ -54,19 +45,27 @@ const resetActivCity = () => {
 };
 const { data } = inject("data");
 const hoverRegion = ref(null);
-const positionReg = reactive({ x: 0, y: 0 });
-const showReg = ref(false);
-const showRegZnach = ref("");
-const handleShow = (region, event) => {
-  console.log(region);
-  showReg.value = true;
-  showRegZnach.value = region;
-  positionReg.x = event.target.clientX + 10;
-  positionReg.y = event.target.clientY + 10;
-};
-const hideShow = () => {
-  showReg.value = false;
-};
+const tooltip = ref({
+  visible: false,
+  text: "",
+  x: 0,
+  y: 0,
+});
+function showTooltip(name, event) {
+  hoverRegion.value = name;
+  tooltip.value.text = name;
+  tooltip.value.visible = true;
+  updateTooltipPosition(event);
+}
+
+function hideTooltip() {
+  hoverRegion.value = null;
+  tooltip.value.visible = false;
+}
+function updateTooltipPosition(event) {
+  tooltip.value.x = event.clientX + 10;
+  tooltip.value.y = event.clientY + 10;
+}
 </script>
 <style scoped>
 .jvectormap-region {
@@ -84,46 +83,20 @@ const hideShow = () => {
   display: flex;
   flex: 0.7;
 }
-.map-wrap .map-image {
-  width: 100%;
-  height: 100%;
-}
 .map-wrap svg {
   width: 100%;
   height: auto;
 }
-svg {
-  border-radius: 10px;
-  width: 100%;
-}
-
-path {
-  position: relative; /* Required for tooltip positioning */
-}
-
-path:hover {
-  fill: #ff0000; /* Change color on hover, example */
-  cursor: pointer; /* Change cursor on hover */
-}
-
-path::before {
-  content: attr(data-tooltip); /* Get tooltip text from attribute */
-  position: absolute;
-  bottom: 20px; /* Adjust position */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.7);
+.tooltip {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.75);
   color: white;
-  padding: 5px;
-  border-radius: 3px;
+  padding: 4px 8px;
+  border-radius: 4px;
   font-size: 12px;
+  pointer-events: none;
   white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-  z-index: 1; /* Ensure tooltip is above other elements */
-}
-
-path:hover::before {
-  opacity: 1; /* Show tooltip on hover */
+  z-index: 1000;
+  user-select: none;
 }
 </style>

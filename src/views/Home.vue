@@ -12,6 +12,7 @@
         @handleDistrict="handleDistrict"
       />
     </template>
+    {{ getData }}
   </AppDiv>
 </template>
 <script setup>

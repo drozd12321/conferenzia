@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import regions from "@/utils/region";
 import { computed, reactive, ref } from "vue";
-import useFilterDistrict from "@/use/UseFilterDistrict";
 const useDataStore = defineStore("data", () => {
   const alldata = ref();
 

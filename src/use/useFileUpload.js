@@ -1,6 +1,7 @@
 import { ref } from "vue";
 import * as XLSX from "xlsx";
 import useDataStore from "@/store/useDataStore";
+import regions from "@/utils/region";
 export default function useFileUpload() {
   const dataStore = useDataStore();
   const isLoading = ref(false);

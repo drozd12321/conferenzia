@@ -1,10 +1,22 @@
 import useDataStore from "@/store/useDataStore";
-import { computed, ref } from "vue";
-
-export default function () {
-  const res = ref();
+import regions from "@/utils/region";
+export default function useFilterDistrict() {
+  const res = {};
   const { getData, getKey } = useDataStore();
-  const data = computed(() => getData.value);
-  const key = computed(() => getKey.value);
+  const copy = getData;
+  for (const reg in copy) {
+    if (getData[reg].federalDistr === getKey) {
+      res[reg] = { ...getData[reg], isCheck: true };
+      if (res[reg].isCheck) {
+        regions.forEach((item) => {
+          if (item.name === reg) {
+            item.fill = "red";
+          }
+        });
+      }
+    } else if (getKey === "Все") {
+      res[reg] = getData[reg];
+    }
+  }
   return res;
 }

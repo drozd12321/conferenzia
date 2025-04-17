@@ -1,16 +1,19 @@
 <template>
-  <div class="federal">
-    <div
-      v-for="distr in district"
-      :class="{
-        [distr.distr]: true,
-        active: activDistrict === distr.name,
-      }"
-      @click="handleDistrict(distr.name)"
-    >
-      {{ distr.name }}
+  <transition name="fade" mode="out-in">
+    <div class="federal">
+      <!-- <component :is="Component"></component> -->
+      <div
+        v-for="distr in district"
+        :class="{
+          [distr.distr]: true,
+          active: activDistrict === distr.name,
+        }"
+        @click="handleDistrict(distr.name)"
+      >
+        {{ distr.name }}
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 <script setup>
 import district from "@/utils/district";
@@ -24,6 +27,15 @@ const handleDistrict = (name) => {
 };
 </script>
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.4s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 .federal {
   display: grid;
   grid-template-areas: "ALLI ZFO CZFO UFO PFO YFO CFO DFO CKFO";
@@ -32,6 +44,7 @@ const handleDistrict = (name) => {
   cursor: pointer;
   justify-content: space-around;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: all 0.5s ease;
 }
 .ZFO {
   grid-area: ZFO;

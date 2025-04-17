@@ -5,14 +5,13 @@
     </template>
     <ErrorMsg v-if="errorMsg" :errormsg="errorMsg" />
     <div v-if="isLoading">Загрузка ...</div>
-    <InfoHome :data="getData" />
+    <InfoHome :data="dataFiltered" />
     <template #federal>
       <FederalDistrict
         :activDistrict="activDistrict"
         @handleDistrict="handleDistrict"
       />
     </template>
-    {{ activDistrict }}
   </AppDiv>
 </template>
 <script setup>
@@ -25,6 +24,7 @@ import useFileUpload from "@/use/useFileUpload";
 import useDataStore from "@/store/useDataStore";
 import { computed, provide, reactive, ref } from "vue";
 import { storeToRefs } from "pinia";
+import useFilterDistrict from "@/use/useFilterDistrict";
 const dataStore = useDataStore();
 const { data, errorMsg, handleFile, isLoading } = useFileUpload();
 const { getData, getKey } = storeToRefs(useDataStore());
@@ -32,10 +32,10 @@ const handleFileChange = async (file) => {
   await handleFile(file);
 };
 const activDistrict = computed(() => getKey.value);
-console.log(activDistrict);
+const dataFiltered = computed(() => useFilterDistrict());
 const handleDistrict = async (name) => {
   await dataStore.sentFilterKey(name);
-  console.log(activDistrict);
+  useFilterDistrict();
 };
 const filtdt = computed(() => getData);
 provide("data", { data });

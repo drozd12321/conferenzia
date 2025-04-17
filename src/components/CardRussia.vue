@@ -17,7 +17,10 @@
           class="jvectormap-region"
           @mouseover="showTooltip(region.name, $event)"
           @mouseleave="hideTooltip"
-          :class="{ hovered: hoverRegion === region.name }"
+          :class="{
+            hovered: hoverRegion === region.name,
+            hovered: region.isCheck,
+          }"
         ></path>
       </g>
     </svg>
@@ -31,19 +34,17 @@
   </div>
 </template>
 <script setup>
-import { inject, ref } from "vue";
+import { computed, inject, ref } from "vue";
 import regions from "@/utils/region";
+import useDataStore from "@/store/useDataStore";
+import { storeToRefs } from "pinia";
 const props = defineProps({
   activeCity: String,
 });
+const { getKey } = storeToRefs(useDataStore());
+const { getData } = useDataStore();
+const activDistrict = computed(() => getKey);
 const emit = defineEmits(["hover", "update:subValue"]);
-const setActivCity = (city) => {
-  emit("hover", city);
-};
-const resetActivCity = () => {
-  emit("hover", null);
-};
-const { data } = inject("data");
 const hoverRegion = ref(null);
 const tooltip = ref({
   visible: false,

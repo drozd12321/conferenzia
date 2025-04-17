@@ -12,7 +12,7 @@
         @handleDistrict="handleDistrict"
       />
     </template>
-    {{ getData }}
+    {{ activDistrict }}
   </AppDiv>
 </template>
 <script setup>
@@ -27,11 +27,11 @@ import { computed, provide, reactive, ref } from "vue";
 import { storeToRefs } from "pinia";
 const dataStore = useDataStore();
 const { data, errorMsg, handleFile, isLoading } = useFileUpload();
-const { getData } = storeToRefs(useDataStore());
+const { getData, getKey } = storeToRefs(useDataStore());
 const handleFileChange = async (file) => {
   await handleFile(file);
 };
-const activDistrict = ref("");
+const activDistrict = computed(() => getKey);
 const handleDistrict = (name) => {
   activDistrict.value = name;
   console.log(getData.value);

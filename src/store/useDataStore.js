@@ -8,13 +8,16 @@ const useDataStore = defineStore("data", () => {
   const getData = computed(() => {
     return alldata.value;
   });
+  const getKey = computed(() => {
+    return filterkey.value;
+  });
   function loadData(newData) {
     alldata.value = newData;
+    console.log(alldata);
   }
   function sentFilterKey(key = "Все") {
     filterkey.value = key;
-    console.log(filterkey);
   }
-  return { alldata, getData, loadData, sentFilterKey };
+  return { alldata, getData, loadData, sentFilterKey, getKey };
 });
 export default useDataStore;

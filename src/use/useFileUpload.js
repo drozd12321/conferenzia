@@ -2,13 +2,14 @@ import { ref } from "vue";
 import * as XLSX from "xlsx";
 import useDataStore from "@/store/useDataStore";
 import regions from "@/utils/region";
+import useAddDistrict from "./UseFilterDistrict";
 export default function useFileUpload() {
   const dataStore = useDataStore();
   const isLoading = ref(false);
   const errorMsg = ref(null);
   const headers = ref([]);
   const cities = ref([]);
-  const data = ref({});
+  const data = {};
 
   const handleFile = async (file) => {
     data.value = {};
@@ -50,8 +51,9 @@ export default function useFileUpload() {
       });
 
       data.value = result;
+      // console.log(useAddDistrict(data));
       dataStore.sentFilterKey();
-      dataStore.loadData(data.value);
+      dataStore.loadData(useAddDistrict(data));
     } catch (error) {
       console.error("Ошибка при загрузке данных:", error);
       errorMsg.value = `Ошибка: ${error.message}`;

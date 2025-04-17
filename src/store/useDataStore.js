@@ -15,7 +15,7 @@ const useDataStore = defineStore("data", () => {
     alldata.value = newData;
     console.log(alldata);
   }
-  function sentFilterKey(key = "Все") {
+  async function sentFilterKey(key = "Все") {
     filterkey.value = key;
   }
   return { alldata, getData, loadData, sentFilterKey, getKey };

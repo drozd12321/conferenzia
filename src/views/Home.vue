@@ -33,9 +33,9 @@ const handleFileChange = async (file) => {
 };
 const activDistrict = computed(() => getKey.value);
 console.log(activDistrict);
-const handleDistrict = (name) => {
-  activDistrict.value = name;
-  console.log(getData.value);
+const handleDistrict = async (name) => {
+  await dataStore.sentFilterKey(name);
+  console.log(activDistrict);
 };
 const filtdt = computed(() => getData);
 provide("data", { data });

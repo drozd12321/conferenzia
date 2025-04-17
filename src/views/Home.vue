@@ -31,7 +31,8 @@ const { getData, getKey } = storeToRefs(useDataStore());
 const handleFileChange = async (file) => {
   await handleFile(file);
 };
-const activDistrict = computed(() => getKey);
+const activDistrict = computed(() => getKey.value);
+console.log(activDistrict);
 const handleDistrict = (name) => {
   activDistrict.value = name;
   console.log(getData.value);

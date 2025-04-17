@@ -2,7 +2,10 @@
   <div class="federal">
     <div
       v-for="distr in district"
-      :class="{ [distr.distr]: true, active: activDistrict === distr.name }"
+      :class="{
+        [distr.distr]: true,
+        active: activDistrict === distr.name,
+      }"
       @click="handleDistrict(distr.name)"
     >
       {{ distr.name }}

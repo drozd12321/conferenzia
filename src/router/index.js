@@ -1,4 +1,6 @@
+import InfoRegion from "@/components/InfoRegion.vue";
 import Home from "@/views/Home.vue";
+import Layout from "@/views/Layout.vue";
 import PuctThree from "@/views/PuctThree.vue";
 import PunctOne from "@/views/PunctOne.vue";
 import PunctTwo from "@/views/PunctTwo.vue";
@@ -9,8 +11,20 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home,
+      name: "Layout",
+      component: Layout,
+      children: [
+        {
+          path: "",
+          name: "Home",
+          component: Home,
+        },
+        {
+          path: "region/:name",
+          name: "region",
+          component: InfoRegion,
+        },
+      ],
     },
     {
       path: "/punctone",

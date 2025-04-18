@@ -21,6 +21,7 @@ const props = defineProps({
   padding: 20px;
   border-radius: 5px; /* Добавляет скругленные углы */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  height: 750px;
 }
 h1 {
   text-align: center;

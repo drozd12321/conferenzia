@@ -3,6 +3,7 @@
     v-if="!!subValue"
     class="row"
     :class="{ active: active }"
+    @click="goToRegion(sub)"
     @mouseover="onHover"
     @mouseleave="onLeave"
   >
@@ -12,7 +13,11 @@
 </template>
 <script setup>
 import { defineProps } from "vue";
-
+import { useRouter } from "vue-router";
+const router = useRouter();
+const goToRegion = (region) => {
+  router.push(`region/${region}`);
+};
 const props = defineProps({
   sub: String,
   znach: String,

@@ -8,7 +8,11 @@
             <span>Cубьект</span>
             <span>Значение</span>
           </div>
-          <div v-for="(cityData, cityName) in data" :key="cityName">
+          <div
+            class="rowtable"
+            v-for="(cityData, cityName) in data"
+            :key="cityName"
+          >
             <RowTable
               :sub="cityName"
               :subValue="cityName"
@@ -52,6 +56,8 @@ const handleActiv = (city) => {
   gap: 10px;
   border: 2px solid var(--content-color);
   border-radius: 3px;
+  max-height: 400px;
+  overflow-y: auto;
 }
 .head {
   display: grid;
@@ -60,6 +66,10 @@ const handleActiv = (city) => {
   font-size: 25px;
   font-weight: 600;
   border-bottom: 3px solid var(--content-color);
+  position: sticky;
+  top: 0;
+  background-color: var(--act);
+  z-index: 10;
 }
 h2 {
   font-size: 35px;

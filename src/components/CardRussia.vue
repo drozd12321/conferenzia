@@ -18,7 +18,7 @@
           @mouseover="showTooltip(region.name, $event)"
           @mouseleave="hideTooltip"
           :class="{
-            hovered: hoverRegion === region.name,
+            hovered: activeCity === region.name,
             check: region.isCheck,
           }"
         ></path>
@@ -38,6 +38,7 @@ import { computed, inject, reactive, ref } from "vue";
 import regions from "@/utils/region";
 import useDataStore from "@/store/useDataStore";
 import { storeToRefs } from "pinia";
+import { showTooltip, hideTooltip, tooltip } from "@/use/useHover";
 const props = defineProps({
   activeCity: String,
 });
@@ -46,28 +47,6 @@ const { getKey } = storeToRefs(useDataStore());
 const { getData } = useDataStore();
 const activDistrict = computed(() => getKey);
 const emit = defineEmits(["hover", "update:subValue"]);
-const hoverRegion = ref(null);
-const tooltip = ref({
-  visible: false,
-  text: "",
-  x: 0,
-  y: 0,
-});
-function showTooltip(name, event) {
-  hoverRegion.value = name;
-  tooltip.value.text = name;
-  tooltip.value.visible = true;
-  updateTooltipPosition(event);
-}
-
-function hideTooltip() {
-  hoverRegion.value = null;
-  tooltip.value.visible = false;
-}
-function updateTooltipPosition(event) {
-  tooltip.value.x = event.clientX + 10;
-  tooltip.value.y = event.clientY + 10;
-}
 </script>
 <style scoped>
 .check {

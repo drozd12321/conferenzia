@@ -3,8 +3,8 @@
     v-if="!!subValue"
     class="row"
     :class="{ active: active }"
-    @mouseleave="$emit('update:subValue', null)"
-    @mouseenter="$emit('update:subValue', sub)"
+    @mouseover="onHover"
+    @mouseleave="onLeave"
   >
     <span>{{ sub }}</span>
     <span>{{ znach }}</span>
@@ -12,13 +12,21 @@
 </template>
 <script setup>
 import { defineProps } from "vue";
+
 const props = defineProps({
   sub: String,
   znach: String,
   subValue: String,
   active: Boolean,
 });
-const emit = defineEmits(["update:subValue", "updateVal", "hover", "leave"]);
+
+const emit = defineEmits(["hover", "leave"]);
+function onHover() {
+  emit("hover", props.sub);
+}
+function onLeave() {
+  emit("hover", null);
+}
 </script>
 <style scoped>
 .row {

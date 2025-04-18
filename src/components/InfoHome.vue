@@ -13,7 +13,7 @@
               :sub="cityName"
               :subValue="cityName"
               :active="activeEl === cityName"
-              @update:subValue="handleActiv"
+              @hover="handleActiv"
             />
           </div>
         </div>

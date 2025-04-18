@@ -38,6 +38,5 @@ const handleDistrict = async (name) => {
   useFilterDistrict();
 };
 const filtdt = computed(() => getData);
-provide("data", { data });
 </script>
 <style scoped></style>

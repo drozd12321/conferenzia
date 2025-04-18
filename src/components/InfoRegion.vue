@@ -1,23 +1,26 @@
 <template>
-  <div class="info">
-    <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}</h2>
-    <div class="infopokaz">
-      <div
-        class="pokaz"
-        v-for="([value, key], index) in paginatedEntries"
-        :key="index"
-      >
-        <p>{{ value }}</p>
-        <p>{{ key }}</p>
+  <div>
+    <div class="info">
+      <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}</h2>
+      <div class="infopokaz">
+        <div
+          class="pokaz"
+          v-for="([value, key], index) in paginatedEntries"
+          :key="index"
+        >
+          <p>{{ value }}</p>
+          <p>{{ key }}</p>
+        </div>
       </div>
+      <ThePagination
+        :curentPage="curentPage"
+        :totalPage="totalPage"
+        @prev="curentPage > 1 && curentPage--"
+        @next="curentPage < totalPage && curentPage++"
+        @go="(page) => (curentPage = page)"
+      />
     </div>
-    <ThePagination
-      :curentPage="curentPage"
-      :totalPage="totalPage"
-      @prev="curentPage > 1 && curentPage--"
-      @next="curentPage < totalPage && curentPage++"
-      @go="(page) => (curentPage = page)"
-    />
+    <BarChart :data="data" />
   </div>
 </template>
 <script setup>
@@ -25,6 +28,7 @@ import useDataOneRegion from "@/use/UseDataOneRedion";
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 import ThePagination from "./ThePagination.vue";
+import BarChart from "./BarChart.vue";
 const route = useRoute();
 const nameregion = route.params.name;
 const data = computed(() => useDataOneRegion(nameregion));
@@ -42,6 +46,29 @@ const paginatedEntries = computed(() => {
 const totalPage = computed(() => {
   return Math.ceil(entries.value.length / itemPerPage);
 });
+const chartData = ref({
+  labels: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн'],
+  datasets: [
+    {
+      label: 'Продажи',
+      data: [40, 39, 10, 40, 39, 80],
+      backgroundColor: '#42b983',  // Цвет столбцов
+      borderRadius: 4,             // Скругление углов столбцов (необязательно)
+    },
+  ],
+})
+const chartOptions = ref({
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: 'top',
+    },
+    title: {
+      display: true,
+      text: 'Столбиковая диаграмма продаж',
+    },
+  },
 </script>
 <style scoped>
 p {

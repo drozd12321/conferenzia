@@ -47,28 +47,29 @@ const totalPage = computed(() => {
   return Math.ceil(entries.value.length / itemPerPage);
 });
 const chartData = ref({
-  labels: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн'],
+  labels: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн"],
   datasets: [
     {
-      label: 'Продажи',
+      label: "Продажи",
       data: [40, 39, 10, 40, 39, 80],
-      backgroundColor: '#42b983',  // Цвет столбцов
-      borderRadius: 4,             // Скругление углов столбцов (необязательно)
+      backgroundColor: "#42b983", // Цвет столбцов
+      borderRadius: 4, // Скругление углов столбцов (необязательно)
     },
   ],
-})
+});
 const chartOptions = ref({
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
     legend: {
-      position: 'top',
+      position: "top",
     },
     title: {
       display: true,
-      text: 'Столбиковая диаграмма продаж',
+      text: "Столбиковая диаграмма продаж",
     },
   },
+});
 </script>
 <style scoped>
 p {

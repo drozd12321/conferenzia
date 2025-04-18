@@ -1,4 +1,6 @@
-const regions = [
+import { ref } from "vue";
+
+const regions = ref([
   {
     name: "Луганская Народная республика",
     id: "jqvmap1_lr",
@@ -1104,5 +1106,5 @@ const regions = [
     original: "#3175b5",
     federalDistrict: "СКФО",
   },
-];
-export default regions;
+]);
+export default regions.value;

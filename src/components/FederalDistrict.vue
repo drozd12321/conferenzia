@@ -1,7 +1,6 @@
 <template>
   <transition name="fade" mode="out-in">
     <div class="federal">
-      <!-- <component :is="Component"></component> -->
       <div
         v-for="distr in district"
         :class="{

@@ -3,7 +3,7 @@
     <svg viewBox="0 0 512.483 350" preserveAspectRatio="xMidYMid meet">
       <g transform="scale(0.5176595959595959) translate(0, 41.55999418517301)">
         <path
-          v-for="region in regions"
+          v-for="region in regReact"
           :data-tooltip="region.name"
           :key="region.id"
           :d="region.d"
@@ -19,7 +19,7 @@
           @mouseleave="hideTooltip"
           :class="{
             hovered: hoverRegion === region.name,
-            hovered: region.isCheck,
+            check: region.isCheck,
           }"
         ></path>
       </g>
@@ -34,13 +34,14 @@
   </div>
 </template>
 <script setup>
-import { computed, inject, ref } from "vue";
+import { computed, inject, reactive, ref } from "vue";
 import regions from "@/utils/region";
 import useDataStore from "@/store/useDataStore";
 import { storeToRefs } from "pinia";
 const props = defineProps({
   activeCity: String,
 });
+const regReact = computed(() => regions);
 const { getKey } = storeToRefs(useDataStore());
 const { getData } = useDataStore();
 const activDistrict = computed(() => getKey);
@@ -69,6 +70,11 @@ function updateTooltipPosition(event) {
 }
 </script>
 <style scoped>
+.check {
+  fill: #f7f7f7 !important; /* Добавьте !important */
+  stroke: #fff;
+}
+
 .jvectormap-region {
   cursor: pointer;
   transition: all 0.3s ease;

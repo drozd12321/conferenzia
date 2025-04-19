@@ -70,6 +70,7 @@ const chartOptions = ref({
       text: "Инфляция",
     },
   },
+
   scales: {
     x: {
       title: {

@@ -1,9 +1,15 @@
 <template>
-  <div></div>
+  <div class="div">
+    <Bar :data="chartData" :options="chartOptions"></Bar>
+  </div>
 </template>
 <script setup>
 import { Bar } from "vue-chartjs";
 import { ref } from "vue";
+const props = defineProps({
+  chartData: Object,
+  chartOptions: Object,
+});
 import {
   Chart as ChartJS,
   Title,
@@ -21,8 +27,10 @@ ChartJS.register(
   CategoryScale,
   LinearScale
 );
-const props = defineProps({
-  data: Object,
-});
 </script>
-<style scoped></style>
+<style scoped>
+.div {
+  height: 200px;
+  width: 400px;
+}
+</style>

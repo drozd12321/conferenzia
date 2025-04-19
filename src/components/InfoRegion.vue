@@ -20,7 +20,7 @@
         @go="(page) => (curentPage = page)"
       />
     </div>
-    <BarChart :data="data" />
+    <BarChart :chartData="chartData" :chartOptions="chartOptions" />
   </div>
 </template>
 <script setup>
@@ -52,8 +52,8 @@ const chartData = ref({
     {
       label: "Продажи",
       data: [40, 39, 10, 40, 39, 80],
-      backgroundColor: "#42b983", // Цвет столбцов
-      borderRadius: 4, // Скругление углов столбцов (необязательно)
+      backgroundColor: "blue",
+      borderRadius: 4,
     },
   ],
 });
@@ -66,7 +66,7 @@ const chartOptions = ref({
     },
     title: {
       display: true,
-      text: "Столбиковая диаграмма продаж",
+      text: "Инфляция",
     },
   },
 });

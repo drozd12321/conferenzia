@@ -29,6 +29,7 @@ import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 import ThePagination from "./ThePagination.vue";
 import BarChart from "./BarChart.vue";
+import { scales } from "chart.js";
 const route = useRoute();
 const nameregion = route.params.name;
 const data = computed(() => useDataOneRegion(nameregion));
@@ -67,6 +68,23 @@ const chartOptions = ref({
     title: {
       display: true,
       text: "Инфляция",
+    },
+  },
+  scales: {
+    x: {
+      title: {
+        display: true,
+        text: "%",
+      },
+    },
+    y: {
+      title: {
+        display: true,
+        text: "Года",
+      },
+      grid: {
+        color: "gray",
+      },
     },
   },
 });

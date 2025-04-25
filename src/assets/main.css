@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
   --head-color: #ffffff;
   --content-color: #e0e0e0;

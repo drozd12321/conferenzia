@@ -3,14 +3,21 @@ import { RouterLink, RouterView } from "vue-router";
 import { ref, onMounted } from "vue";
 import TheHeader from "@/components/TheHeader.vue";
 import autoAnimate from "@formkit/auto-animate";
+import { VMain } from "vuetify/components/VMain";
+import { VApp } from "vuetify/components/VApp";
+import { VAppBar, VAppBarTitle } from "vuetify/components/VAppBar";
 </script>
 <template>
-  <TheHeader />
-  <RouterView v-slot="{ Component }">
-    <transition name="fade" mode="out-in">
-      <component :is="Component"></component>
-    </transition>
-  </RouterView>
+  <VApp>
+    <v-app-bar app color="#1d1d1d">
+      <VAppBarTitle><h3>Title</h3></VAppBarTitle>
+      <VAppBarTitle>2</VAppBarTitle>
+      <VAppBarTitle>2</VAppBarTitle>
+    </v-app-bar>
+    <VMain>
+      <RouterView></RouterView>
+    </VMain>
+  </VApp>
 </template>
 
 <style scoped>

@@ -1,22 +1,9 @@
 <template>
-  <header>
-    <h1 class="h1">Моя система</h1>
-    <div class="glavn">
-      <router-link to="/"><span>Главная</span></router-link>
-    </div>
-    <div class="one">
-      <router-link to="/punctone"><span>Пункт1</span></router-link>
-    </div>
-    <div class="two">
-      <router-link to="/puncttwo"><span>Пункт2</span></router-link>
-    </div>
-    <div class="three">
-      <router-link to="/punctthree"><span>Пункт3</span></router-link>
-    </div>
-  </header>
+  <header></header>
 </template>
 <script setup>
 import { useRoute } from "vue-router";
+import { VAppBar } from "vuetify/components/VAppBar";
 const route = useRoute();
 </script>
 <style scoped>

@@ -1,10 +1,30 @@
 <template>
-  <header></header>
+  <v-app-bar color="#1d1d1d" class="d-flex">
+    <v-row no-gutters align="center" class="w-100">
+      <v-col cols="2">
+        <RouterLink to="/">Главная</RouterLink>
+      </v-col>
+      <v-spacer color="red lighten-5"></v-spacer>
+    </v-row>
+    <v-btn
+      v-for="item in navItems"
+      :key="item.to"
+      :to="item.to"
+      variant="text"
+      color="white"
+      >{{ item.title }}</v-btn
+    >
+  </v-app-bar>
 </template>
 <script setup>
 import { useRoute } from "vue-router";
-import { VAppBar } from "vuetify/components/VAppBar";
+import { VAppBar, VAppBarTitle } from "vuetify/components/VAppBar";
 const route = useRoute();
+const navItems = [
+  { to: "/punctone", title: "Пункт1" },
+  { to: "/puncttwo", title: "Пункт2" },
+  { to: "/punctthree", title: "Пункт3" },
+];
 </script>
 <style scoped>
 header {

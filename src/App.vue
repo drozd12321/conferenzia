@@ -9,12 +9,8 @@ import { VAppBar, VAppBarTitle } from "vuetify/components/VAppBar";
 </script>
 <template>
   <VApp>
-    <v-app-bar app color="#1d1d1d">
-      <VAppBarTitle><h3>Title</h3></VAppBarTitle>
-      <VAppBarTitle>2</VAppBarTitle>
-      <VAppBarTitle>2</VAppBarTitle>
-    </v-app-bar>
-    <VMain>
+    <TheHeader />
+    <VMain class="mt-2.5">
       <RouterView></RouterView>
     </VMain>
   </VApp>

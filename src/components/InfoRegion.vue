@@ -6,8 +6,8 @@
         <div class="infopokaz" :key="curentPage">
           <div
             class="pokaz"
-            v-for="([value, key], index) in paginatedEntries"
-            :key="index"
+            v-for="[value, key] in paginatedEntries"
+            :key="key"
           >
             <p>{{ value }}</p>
             <p>{{ key }}</p>
@@ -129,34 +129,18 @@ p {
   color: var(--content-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
-.fade-enter-active {
-  animation: in 0.4s ease;
-}
+.fade-enter-active,
 .fade-leave-active {
-  animation: out 0.4s ease;
+  transition: all 0.5s ease;
 }
-.fade-enter-from,
+
+.fade-enter-from {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
 .fade-leave-to {
   opacity: 0;
-}
-@keyframes in {
-  from {
-    opacity: 0;
-    transform: translateX(100px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-@keyframes out {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(100px); /* Изменил направление для лучшего эффекта */
-  }
+  transform: translateX(100px);
 }
 </style>

@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="info">
-      <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}</h2>
+      <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}sdsd</h2>
+      <div>fff</div>
       <div class="infopokaz">
         <div
           class="pokaz"

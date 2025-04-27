@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="info">
-      <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}</h2>
+      <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}d</h2>
       <transition name="fade" mode="out-in">
         <div class="infopokaz" :key="curentPage">
           <div

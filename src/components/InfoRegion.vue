@@ -1,18 +1,19 @@
 <template>
   <div>
     <div class="info">
-      <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}sdsd</h2>
-      <div>fff</div>
-      <div class="infopokaz">
-        <div
-          class="pokaz"
-          v-for="([value, key], index) in paginatedEntries"
-          :key="index"
-        >
-          <p>{{ value }}</p>
-          <p>{{ key }}</p>
+      <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}</h2>
+      <transition name="fade" mode="out-in">
+        <div class="infopokaz" :key="curentPage">
+          <div
+            class="pokaz"
+            v-for="([value, key], index) in paginatedEntries"
+            :key="index"
+          >
+            <p>{{ value }}</p>
+            <p>{{ key }}</p>
+          </div>
         </div>
-      </div>
+      </transition>
       <ThePagination
         :curentPage="curentPage"
         :totalPage="totalPage"
@@ -127,5 +128,35 @@ p {
   padding: 20px;
   color: var(--content-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.fade-enter-active {
+  animation: in 0.4s ease;
+}
+.fade-leave-active {
+  animation: out 0.4s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+@keyframes in {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100px); /* Изменил направление для лучшего эффекта */
+  }
 }
 </style>

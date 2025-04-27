@@ -30,7 +30,7 @@ ChartJS.register(
 </script>
 <style scoped>
 .div {
-  height: 200px;
-  width: 400px;
+  height: 300px;
+  width: 600px;
 }
 </style>

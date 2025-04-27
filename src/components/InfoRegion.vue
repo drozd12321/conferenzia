@@ -31,11 +31,11 @@ import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 import ThePagination from "./ThePagination.vue";
 import BarChart from "./BarChart.vue";
-import { scales } from "chart.js";
+import useDataKeys from "@/use/useRataKeys";
 const route = useRoute();
 const nameregion = route.params.name;
 const data = computed(() => useDataOneRegion(nameregion));
-const itemPerPage = 5;
+const itemPerPage = 3;
 const curentPage = ref(1);
 const entries = computed(() => {
   if (!data.value || !data.value[0]) return [];
@@ -49,23 +49,25 @@ const paginatedEntries = computed(() => {
 const totalPage = computed(() => {
   return Math.ceil(entries.value.length / itemPerPage);
 });
+const { keys: infl, values: inflVak } = useDataKeys(data.value[0], "Инфляция");
 const chartData = ref({
-  labels: ["Янв", "Фев", "Мар", "Апр", "Май", "Июн"],
+  labels: infl.map((it) => it),
   datasets: [
     {
-      label: "Продажи",
-      data: [40, 39, 10, 40, 39, 80],
-      backgroundColor: "blue",
+      label: "Инфляция",
+      data: inflVak.map((it) => it),
+      backgroundColor: ["white", "blue", "red"],
       borderRadius: 4,
     },
   ],
 });
+
 const chartOptions = ref({
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
     legend: {
-      position: "top",
+      position: "bottom",
     },
     title: {
       display: true,
@@ -115,12 +117,12 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 350px;
+  height: 200px;
 }
 .info {
   display: grid;
   width: 600px;
-  height: 450px;
+  height: 350px;
   grid-template-areas: "h2 h2 h2" "infopokaz infopokaz infopokaz";
   margin: 25px auto;
   background-color: var(--contentfon);

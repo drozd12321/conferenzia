@@ -12,9 +12,14 @@ function onItemSelect(event) {
   console.log(event.item.label);
   storeApp.setNameFilter(event.item.label);
 }
+function onItemSelectGroup(event) {
+  console.log(event.item.label);
+  storeApp.setnameGroup(event.item.label);
+}
 const items = ref([
   {
     label: "Экономическая детерминация",
+    command: onItemSelectGroup,
     items: [
       {
         label: "Рост З/П",
@@ -40,6 +45,7 @@ const items = ref([
   },
   {
     label: "Ацентрические настроения",
+    command: onItemSelectGroup,
     items: [
       {
         label: "Рост преступности",
@@ -53,6 +59,7 @@ const items = ref([
   },
   {
     label: "Действия властей подрывающие авторитет",
+    command: onItemSelectGroup,
     items: [
       {
         label: "Нарушение законов",
@@ -62,6 +69,7 @@ const items = ref([
   },
   {
     label: "Невнятность действий",
+    command: onItemSelectGroup,
     items: [
       {
         label: "Отсутствие открытости действий",

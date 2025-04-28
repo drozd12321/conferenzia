@@ -26,7 +26,9 @@
           @go="(page) => (curentPage = page)"
         />
       </div>
-      <div>Информация про индикаторы {{ nameMenu }}</div>
+      <div>
+        <InfoApparat :nameKey="nameMenu" :nameGroup="nameGroup" />
+      </div>
     </div>
     <BarChart :chartData="chartData" :chartOptions="chartOptions" />
   </div>
@@ -41,8 +43,11 @@ import useDataKeys from "@/use/useRataKeys";
 import AppAccordion from "./AppAccordion.vue";
 import useApparatStore from "@/store/useApparatStore";
 import { storeToRefs } from "pinia";
+import InfoApparat from "./InfoApparat.vue";
+
+import apparat from "@/data/apparat";
 const route = useRoute();
-const { getNameFilter } = storeToRefs(useApparatStore());
+const { getNameFilter, getnameGroup } = storeToRefs(useApparatStore());
 const nameregion = route.params.name;
 const data = computed(() => useDataOneRegion(nameregion));
 const itemPerPage = 3;
@@ -53,6 +58,9 @@ const entries = computed(() => {
 });
 const nameMenu = computed(() => {
   return getNameFilter.value;
+});
+const nameGroup = computed(() => {
+  return getnameGroup.value;
 });
 const paginatedEntries = computed(() => {
   const start = (curentPage.value - 1) * itemPerPage;

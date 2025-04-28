@@ -2,6 +2,14 @@ import { defineStore } from "pinia";
 import { computed, reactive, ref } from "vue";
 const useApparatStore = defineStore("apparat", () => {
   const nameFilter = ref("");
+  const nameGroup = ref("");
+  const getnameGroup = computed(() => {
+    return nameGroup.value;
+  });
+  function setnameGroup(newData) {
+    nameGroup.value = newData;
+    console.log(nameGroup);
+  }
   const getNameFilter = computed(() => {
     return nameFilter.value;
   });
@@ -10,6 +18,6 @@ const useApparatStore = defineStore("apparat", () => {
     console.log(nameFilter);
   }
 
-  return { getNameFilter, setNameFilter, nameFilter };
+  return { getNameFilter, setNameFilter, setnameGroup, getnameGroup };
 });
 export default useApparatStore;

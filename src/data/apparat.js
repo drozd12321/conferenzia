@@ -1,4 +1,4 @@
-export default apparat = ref([
+const apparat = [
   {
     group: "Экономическая детерминация",
     factors: [
@@ -86,4 +86,5 @@ export default apparat = ref([
       },
     ],
   },
-]);
+];
+export default apparat;

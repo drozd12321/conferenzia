@@ -26,7 +26,7 @@
           @go="(page) => (curentPage = page)"
         />
       </div>
-      <div>
+      <div class="infApp">
         <InfoApparat :nameKey="nameMenu" :nameGroup="nameGroup" />
       </div>
     </div>
@@ -116,6 +116,9 @@ const chartOptions = ref({
 });
 </script>
 <style scoped>
+.infApp {
+  width: 300px;
+}
 p {
   padding: 2px;
 }

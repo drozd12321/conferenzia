@@ -1,6 +1,6 @@
 <template>
   {{ apparat }}
-  <div>
+  <div class="inf">
     <h2 v-if="nameGroup">Группа факторов: {{ nameGroup }}</h2>
     <h3 v-if="nameKey">Фактор: {{ nameKey }}</h3>
     <div>
@@ -21,4 +21,8 @@ function getDiscrApp(name) {
   data.value = apparat.filter(item);
 }
 </script>
-<style scoped></style>
+<style scoped>
+.inf {
+  width: 300px;
+}
+</style>

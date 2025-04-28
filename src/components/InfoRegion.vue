@@ -1,26 +1,32 @@
 <template>
   <div>
     <div class="info">
-      <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}d</h2>
-      <transition name="fade" mode="out-in">
-        <div class="infopokaz" :key="curentPage">
-          <div
-            class="pokaz"
-            v-for="[value, key] in paginatedEntries"
-            :key="key"
-          >
-            <p>{{ value }}</p>
-            <p>{{ key }}</p>
+      <div class="accord">
+        <AppAccordion />
+      </div>
+      <div>
+        <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}d</h2>
+        <transition name="fade" mode="out-in">
+          <div class="infopokaz" :key="curentPage">
+            <div
+              class="pokaz"
+              v-for="[value, key] in paginatedEntries"
+              :key="key"
+            >
+              <p>{{ value }}</p>
+              <p>{{ key }}</p>
+            </div>
           </div>
-        </div>
-      </transition>
-      <ThePagination
-        :curentPage="curentPage"
-        :totalPage="totalPage"
-        @prev="curentPage > 1 && curentPage--"
-        @next="curentPage < totalPage && curentPage++"
-        @go="(page) => (curentPage = page)"
-      />
+        </transition>
+        <ThePagination
+          :curentPage="curentPage"
+          :totalPage="totalPage"
+          @prev="curentPage > 1 && curentPage--"
+          @next="curentPage < totalPage && curentPage++"
+          @go="(page) => (curentPage = page)"
+        />
+      </div>
+      <div>Информация про индикаторы {{ nameMenu }}</div>
     </div>
     <BarChart :chartData="chartData" :chartOptions="chartOptions" />
   </div>
@@ -32,7 +38,11 @@ import { useRoute } from "vue-router";
 import ThePagination from "./ThePagination.vue";
 import BarChart from "./BarChart.vue";
 import useDataKeys from "@/use/useRataKeys";
+import AppAccordion from "./AppAccordion.vue";
+import useApparatStore from "@/store/useApparatStore";
+import { storeToRefs } from "pinia";
 const route = useRoute();
+const { getNameFilter } = storeToRefs(useApparatStore());
 const nameregion = route.params.name;
 const data = computed(() => useDataOneRegion(nameregion));
 const itemPerPage = 3;
@@ -40,6 +50,9 @@ const curentPage = ref(1);
 const entries = computed(() => {
   if (!data.value || !data.value[0]) return [];
   return Object.entries(data.value[0]);
+});
+const nameMenu = computed(() => {
+  return getNameFilter.value;
 });
 const paginatedEntries = computed(() => {
   const start = (curentPage.value - 1) * itemPerPage;
@@ -98,6 +111,9 @@ const chartOptions = ref({
 p {
   padding: 2px;
 }
+.accord {
+  flex: 1, 3;
+}
 .pokaz {
   display: flex;
   gap: 15px;
@@ -120,9 +136,10 @@ p {
   height: 200px;
 }
 .info {
-  display: grid;
-  width: 600px;
-  height: 350px;
+  display: flex;
+  justify-content: space-between;
+  width: 98%;
+  height: auto;
   grid-template-areas: "h2 h2 h2" "infopokaz infopokaz infopokaz";
   margin: 25px auto;
   background-color: var(--contentfon);

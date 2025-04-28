@@ -3,7 +3,6 @@ import regions from "@/utils/region";
 import { computed, reactive, ref } from "vue";
 const useDataStore = defineStore("data", () => {
   const alldata = ref();
-
   const filterkey = ref("Все");
   const getData = computed(() => {
     return alldata.value;

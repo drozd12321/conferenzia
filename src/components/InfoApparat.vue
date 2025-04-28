@@ -18,7 +18,7 @@ const props = defineProps({
 });
 function getDiscrApp(name) {
   const data = ref("");
-  data.value = apparat.filter();
+  data.value = apparat.filter(item);
 }
 </script>
 <style scoped></style>

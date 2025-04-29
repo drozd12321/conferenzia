@@ -1,28 +1,51 @@
 <template>
-  {{ apparat }}
   <div class="inf">
-    <h2 v-if="nameGroup">Группа факторов: {{ nameGroup }}</h2>
-    <h3 v-if="nameKey">Фактор: {{ nameKey }}</h3>
-    <div>
-      <div>Показатель:</div>
-      <div>Индикатор:</div>
-      <div>Критерий:</div>
+    <h2 class="infP" v-if="nameGroup">
+      <span>Группа факторов:</span> {{ nameGroup }}
+    </h2>
+    <h3 class="infP" v-if="nameKey"><span>Фактор:</span> {{ nameKey }}</h3>
+    <div v-if="nameKey">
+      <div class="infP">
+        <span>Показатель:</span> {{ getFactorsByName[0]?.pokaz }}
+      </div>
+      <div class="infP">
+        <span>Индикатор:</span> {{ getFactorsByName[0]?.kr }}
+      </div>
+      <div class="infP">
+        <span>Критерий:</span> {{ getFactorsByName[0]?.indicator }}
+      </div>
     </div>
   </div>
 </template>
 <script setup>
 import apparat from "@/data/apparat";
-const props = defineProps({
-  nameKey: String,
-  nameGroup: String,
+import { computed, onMounted, ref } from "vue";
+import { storeToRefs } from "pinia";
+import useApparatStore from "@/store/useApparatStore";
+const { getNameFilter, getnameGroup } = storeToRefs(useApparatStore());
+const nameKey = computed(() => {
+  return getNameFilter.value;
 });
-function getDiscrApp(name) {
-  const data = ref("");
-  data.value = apparat.filter(item);
-}
+const nameGroup = computed(() => {
+  return getnameGroup.value;
+});
+const getFactorsByName = computed(() => {
+  const factors = [];
+  apparat.forEach((group) => {
+    group.factors.forEach((factor) => {
+      if (factor.name === nameKey.value) {
+        factors.push(factor);
+      }
+    });
+  });
+  return factors;
+});
 </script>
 <style scoped>
-.inf {
-  width: 300px;
+span {
+  color: var(--act);
+}
+.infP {
+  padding: 7px;
 }
 </style>

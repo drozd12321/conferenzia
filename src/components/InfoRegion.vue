@@ -5,18 +5,9 @@
         <AppAccordion />
       </div>
       <div>
-        <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}d</h2>
+        <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}</h2>
         <transition name="fade" mode="out-in">
-          <div class="infopokaz" :key="curentPage">
-            <div
-              class="pokaz"
-              v-for="[value, key] in paginatedEntries"
-              :key="key"
-            >
-              <p>{{ value }}</p>
-              <p>{{ key }}</p>
-            </div>
-          </div>
+          <BarChart :chartData="chartData" :chartOptions="chartOptions" />
         </transition>
         <ThePagination
           :curentPage="curentPage"
@@ -27,10 +18,9 @@
         />
       </div>
       <div class="infApp">
-        <InfoApparat :nameKey="nameMenu" :nameGroup="nameGroup" />
+        <InfoApparat />
       </div>
     </div>
-    <BarChart :chartData="chartData" :chartOptions="chartOptions" />
   </div>
 </template>
 <script setup>
@@ -117,7 +107,7 @@ const chartOptions = ref({
 </script>
 <style scoped>
 .infApp {
-  width: 300px;
+  width: 500px;
 }
 p {
   padding: 2px;

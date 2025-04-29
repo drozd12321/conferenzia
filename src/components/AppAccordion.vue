@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PanelMenu :model="items" @item-click="onItemSelect"></PanelMenu>
+    <PanelMenu class="rf" :model="items" @item-click="onItemSelect"></PanelMenu>
   </div>
 </template>
 <script setup>
@@ -13,6 +13,7 @@ function onItemSelect(event) {
   storeApp.setNameFilter(event.item.label);
 }
 function onItemSelectGroup(event) {
+  storeApp.setNameFilter("");
   console.log(event.item.label);
   storeApp.setnameGroup(event.item.label);
 }
@@ -32,7 +33,7 @@ const items = ref([
         command: onItemSelect,
       },
       {
-        label: "Рост цен",
+        label: "Рост цены потребительской корзины",
         icon: "pi pi-image",
         command: onItemSelect,
       },

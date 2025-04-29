@@ -8,10 +8,12 @@
         <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}</h2>
         <transition name="fade" mode="out-in">
           <BarChart
-            v-if="nameMenu === 'Рост З/П'"
+            v-if="chartData.labels?.length"
+            :key="nameMenu"
             :chartData="chartData"
             :chartOptions="chartOptions"
           />
+          <div v-else>Выберите фактор</div>
         </transition>
       </div>
       <div class="infApp">
@@ -74,44 +76,64 @@ const paginatedEntries = computed(() => {
 const totalPage = computed(() => {
   return Math.ceil(entries.value.length / itemPerPage);
 });
-const { keys: infl, values: inflVak } = useDataKeys(data.value[0], "Рост З/П");
-const chartData = ref({
-  labels: infl.map((it) => it),
+// const chartData = ref({
+//   labels: infl.map((it) => it),
+//   datasets: [
+//     {
+//       label: "Рост З/П",
+//       data: inflVak.map((it) => it),
+//       backgroundColor: ["white", "blue", "red"],
+//       borderRadius: 4,
+//     },
+//   ],
+// });
+
+// const chartOptions = ref({
+//   responsive: true,
+//   maintainAspectRatio: false,
+//   plugins: {
+//     legend: {
+//       position: "bottom",
+//     },
+//     title: {
+//       display: true,
+//       text: "Рост З/П",
+//     },
+//   },
+const chartKeysAndValues = computed(() => {
+  // При изменении data.value[0] или nameMenu.value будет заново вызван useDataKeys
+  return useDataKeys(data.value[0], nameMenu.value);
+});
+
+const chartData = computed(() => ({
+  labels: chartKeysAndValues.value.keys.map((it) => it),
   datasets: [
     {
-      label: "Рост З/П",
-      data: inflVak.map((it) => it),
-      backgroundColor: ["white", "blue", "red"],
+      label: nameMenu.value,
+      data: chartKeysAndValues.value.values.map((it) => it),
+      backgroundColor: ["#4CAF50", "#2196F3", "#FF5722"],
       borderRadius: 4,
     },
   ],
-});
+}));
 
-const chartOptions = ref({
+const chartOptions = computed(() => ({
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    legend: {
-      position: "bottom",
-    },
+    legend: { position: "bottom" },
     title: {
       display: true,
-      text: "Рост З/П",
+      text: nameMenu.value, // Динамический заголовок
     },
   },
-
   scales: {
     y: {
-      title: {
-        display: true,
-        text: "%",
-      },
-      grid: {
-        color: "gray",
-      },
+      title: { display: true, text: "%" },
+      grid: { color: "gray" },
     },
   },
-});
+}));
 </script>
 <style scoped>
 .infApp {

@@ -8,7 +8,7 @@
         <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}</h2>
         <transition name="fade" mode="out-in">
           <BarChart
-            v-if="chartData.labels?.length"
+            v-if="nameMenu"
             :key="nameMenu"
             :chartData="chartData"
             :chartOptions="chartOptions"

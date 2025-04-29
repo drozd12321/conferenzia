@@ -7,15 +7,12 @@
       <div>
         <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}</h2>
         <transition name="fade" mode="out-in">
-          <BarChart :chartData="chartData" :chartOptions="chartOptions" />
+          <BarChart
+            v-if="nameMenu === 'Рост З/П'"
+            :chartData="chartData"
+            :chartOptions="chartOptions"
+          />
         </transition>
-        <ThePagination
-          :curentPage="curentPage"
-          :totalPage="totalPage"
-          @prev="curentPage > 1 && curentPage--"
-          @next="curentPage < totalPage && curentPage++"
-          @go="(page) => (curentPage = page)"
-        />
       </div>
       <div class="infApp">
         <InfoApparat />
@@ -23,6 +20,23 @@
     </div>
   </div>
 </template>
+<!-- <div class="infopokaz" :key="curentPage">
+            <div
+              class="pokaz"
+              v-for="[value, key] in paginatedEntries"
+              :key="key"
+            >
+              <p>{{ value }}</p>
+              <p>{{ key }}</p>
+            </div>
+          </div> -->
+<!-- <ThePagination
+          :curentPage="curentPage"
+          :totalPage="totalPage"
+          @prev="curentPage > 1 && curentPage--"
+          @next="curentPage < totalPage && curentPage++"
+          @go="(page) => (curentPage = page)"
+        /> -->
 <script setup>
 import useDataOneRegion from "@/use/UseDataOneRedion";
 import { computed, ref } from "vue";
@@ -60,12 +74,12 @@ const paginatedEntries = computed(() => {
 const totalPage = computed(() => {
   return Math.ceil(entries.value.length / itemPerPage);
 });
-const { keys: infl, values: inflVak } = useDataKeys(data.value[0], "Инфляция");
+const { keys: infl, values: inflVak } = useDataKeys(data.value[0], "Рост З/П");
 const chartData = ref({
   labels: infl.map((it) => it),
   datasets: [
     {
-      label: "Инфляция",
+      label: "Рост З/П",
       data: inflVak.map((it) => it),
       backgroundColor: ["white", "blue", "red"],
       borderRadius: 4,
@@ -82,21 +96,15 @@ const chartOptions = ref({
     },
     title: {
       display: true,
-      text: "Инфляция",
+      text: "Рост З/П",
     },
   },
 
   scales: {
-    x: {
-      title: {
-        display: true,
-        text: "%",
-      },
-    },
     y: {
       title: {
         display: true,
-        text: "Года",
+        text: "%",
       },
       grid: {
         color: "gray",

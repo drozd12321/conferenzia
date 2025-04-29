@@ -111,7 +111,7 @@ const chartData = computed(() => ({
     {
       label: nameMenu.value,
       data: chartKeysAndValues.value.values.map((it) => it),
-      backgroundColor: ["#4CAF50", "#2196F3", "#FF5722"],
+      backgroundColor: ["white", "blue", "red"],
       borderRadius: 4,
     },
   ],

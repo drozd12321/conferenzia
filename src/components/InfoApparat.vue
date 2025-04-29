@@ -46,6 +46,7 @@ span {
   color: var(--act);
 }
 .infP {
+  font-size: 20px;
   padding: 7px;
 }
 </style>

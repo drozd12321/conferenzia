@@ -38,7 +38,7 @@ const items = ref([
         command: onItemSelect,
       },
       {
-        label: "Рабочие места",
+        label: "Рост рабочих мест",
         icon: "pi pi-image",
         command: onItemSelect,
       },
@@ -53,7 +53,7 @@ const items = ref([
         command: onItemSelect,
       },
       {
-        label: "Качество дорог",
+        label: "Рост качества дорог",
         command: onItemSelect,
       },
     ],

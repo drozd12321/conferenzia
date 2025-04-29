@@ -11,6 +11,15 @@ const app = createApp(App);
 const pinia = createPinia();
 app.use(pinia);
 app.use(router);
-app.use(PrimeVue, { theme: { preset: Aura }, ripple: true });
+app.use(PrimeVue, {
+  theme: { preset: Aura },
+  ripple: true,
+  options: {
+    cssLayer: {
+      name: "primevue",
+      order: "theme, base, primevue",
+    },
+  },
+});
 app.directive("ripple", Ripple);
 app.mount("#app");

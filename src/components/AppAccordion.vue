@@ -1,6 +1,11 @@
 <template>
   <div>
-    <PanelMenu class="rf" :model="items" @item-click="onItemSelect"></PanelMenu>
+    <PanelMenu
+      class="text-blue-900"
+      color="red"
+      :model="items"
+      @item-click="onItemSelect"
+    ></PanelMenu>
   </div>
 </template>
 <script setup>

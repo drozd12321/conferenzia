@@ -158,6 +158,7 @@ p {
   text-align: center;
   grid-area: h2;
   color: var(--act);
+  font-size: 45px;
 }
 .infopokaz {
   grid-area: infopokaz;

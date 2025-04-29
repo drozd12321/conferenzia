@@ -1,11 +1,7 @@
 <template>
   <div>
-    <PanelMenu
-      class="text-blue-900"
-      color="red"
-      :model="items"
-      @item-click="onItemSelect"
-    ></PanelMenu>
+    Аппарат1
+    <PanelMenu :model="items" @item-click="onItemSelect"></PanelMenu>
   </div>
 </template>
 <script setup>

@@ -25,6 +25,7 @@ const props = defineProps({
 }
 h1 {
   text-align: center;
+  font-size: 25px;
   color: var(--content-color);
 }
 .h1 {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    Аппарат1
+    <h1>Структура Критериально-оценочного аппарата</h1>
     <PanelMenu :model="items" @item-click="onItemSelect"></PanelMenu>
   </div>
 </template>
@@ -89,4 +89,8 @@ const items = ref([
   },
 ]);
 </script>
-<style scoped></style>
+<style scoped>
+h1 {
+  font-size: 25px;
+}
+</style>

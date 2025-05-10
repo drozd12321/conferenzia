@@ -2,28 +2,17 @@ import apparat from "@/data/apparat";
 
 const CURRENT_YEAR = 2024;
 const PREV_YEAR = CURRENT_YEAR - 1;
-
-/**
- * Рассчитывает вероятность протестного голосования для одного региона
- * @param {Object} regionData - объект с данными региона (Proxy или обычный объект)
- * @returns {number} - вероятность от 0 до 100
- */
 function calcProtestVer(regionData) {
   let totalFactors = 0;
   let triggered = 0;
-
   apparat.forEach((group) => {
     group.factors.forEach((factor) => {
       totalFactors++;
-
       const currentKey = `${factor.name} за ${CURRENT_YEAR} год`;
       const prevKey = `${factor.name} за ${PREV_YEAR} год`;
-
-      const currentValue = regionData[currentKey];
-      const prevValue = regionData[prevKey];
-
+      const currentValue = regionData[0][currentKey];
+      const prevValue = regionData[0][prevKey];
       if (currentValue === undefined || prevValue === undefined) return;
-
       switch (factor.name) {
         case "Рост З/П": {
           const inflCurrent = regionData[`Инфляция за ${CURRENT_YEAR} год`];
@@ -67,17 +56,12 @@ function calcProtestVer(regionData) {
   return totalFactors ? Math.round((triggered / totalFactors) * 100) : 0;
 }
 
-/**
- * Добавляет поле ver с вероятностью протестного голосования в каждый регион
- * @param {Object} regionsData - объект с регионами и их данными (Proxy-объекты)
- */
 function addProtestVerToAllRegions(regionsData) {
   Object.entries(regionsData).forEach(([regionName, regionProxy]) => {
-    // regionProxy - Proxy, но можно обращаться как к объекту
     const ver = calcProtestVer(regionProxy);
-    // Добавляем поле ver в Proxy-объект региона
     regionProxy.ver = ver;
   });
+  return regionsData;
 }
 
 export default addProtestVerToAllRegions;

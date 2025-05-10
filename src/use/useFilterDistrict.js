@@ -18,6 +18,7 @@ export default function useFilterDistrict() {
       }
     }
   }
-  addProtestVerToAllRegions(res);
-  return res;
+  const rs = addProtestVerToAllRegions(res);
+  console.log(rs, "rs");
+  return rs;
 }

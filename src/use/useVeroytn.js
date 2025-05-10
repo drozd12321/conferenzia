@@ -1,5 +1,13 @@
-import apparat from "@/data/apparat"; // ваш файл с критериями
+import apparat from "@/data/apparat";
 
+const CURRENT_YEAR = 2024;
+const PREV_YEAR = CURRENT_YEAR - 1;
+
+/**
+ * Рассчитывает вероятность протестного голосования для одного региона
+ * @param {Object} regionData - объект с данными региона (Proxy или обычный объект)
+ * @returns {number} - вероятность от 0 до 100
+ */
 function calcProtestVer(regionData) {
   let totalFactors = 0;
   let triggered = 0;
@@ -7,90 +15,69 @@ function calcProtestVer(regionData) {
   apparat.forEach((group) => {
     group.factors.forEach((factor) => {
       totalFactors++;
-      const d = regionData[0];
 
-      //   switch (factor.name) {
-      //     case "Рост З/П":
-      //       if (
-      //         d.zarp &&
-      //         d.zarp_prev &&
-      //         d.infl &&
-      //         d.infl_prev &&
-      //         ((d.zarp - d.zarp_prev) / d.zarp_prev) * 100 <
-      //           ((d.infl - d.infl_prev) / d.infl_prev) * 100
-      //       ) {
-      //         triggered++;
-      //       }
-      //       break;
-      //     case "Рост цен на жилье":
-      //       if (
-      //         d.house &&
-      //         d.house_prev &&
-      //         d.zarp &&
-      //         d.zarp_prev &&
-      //         ((d.house - d.house_prev) / d.house_prev) * 100 >
-      //           ((d.zarp - d.zarp_prev) / d.zarp_prev) * 100
-      //       ) {
-      //         triggered++;
-      //       }
-      //       break;
-      //     case "Рост цены потребительской корзины":
-      //       if (d.basket && d.basket_prev && d.basket > d.basket_prev) {
-      //         triggered++;
-      //       }
-      //       break;
-      //     case "Рост рабочих мест":
-      //       if (
-      //         d.unemployed &&
-      //         d.unemployed_prev &&
-      //         d.unemployed > d.unemployed_prev
-      //       ) {
-      //         triggered++;
-      //       }
-      //       break;
-      //     case "Рост преступности":
-      //       if (d.crime && d.crime_prev && d.crime > d.crime_prev) {
-      //         triggered++;
-      //       }
-      //       break;
-      //     case "Рост качества дорог":
-      //       if (d.road && d.road_prev && d.road < d.road_prev) {
-      //         triggered++;
-      //       }
-      //       break;
-      //     case "Нарушение законов":
-      //       if (d.law_violations) {
-      //         // например, булево или число случаев
-      //         triggered++;
-      //       }
-      //       break;
-      //     case "Отсутствие открытости действий":
-      //       if (d.closed_actions) {
-      //         triggered++;
-      //       }
-      //       break;
-      //     case "Противоречивость действий":
-      //       if (d.contradictory_actions) {
-      //         triggered++;
-      //       }
-      //       break;
-      //     case "Пассивность":
-      //       if (d.passivity) {
-      //         triggered++;
-      //       }
-      //       break;
-      //   }
+      const currentKey = `${factor.name} за ${CURRENT_YEAR} год`;
+      const prevKey = `${factor.name} за ${PREV_YEAR} год`;
+
+      const currentValue = regionData[currentKey];
+      const prevValue = regionData[prevKey];
+
+      if (currentValue === undefined || prevValue === undefined) return;
+
+      switch (factor.name) {
+        case "Рост З/П": {
+          const inflCurrent = regionData[`Инфляция за ${CURRENT_YEAR} год`];
+          if (inflCurrent === undefined) break;
+          if (currentValue < inflCurrent) triggered++;
+          break;
+        }
+        case "Рост цен на жилье": {
+          const zpCurrent = regionData[`Рост З/П за ${CURRENT_YEAR} год`];
+          if (zpCurrent === undefined) break;
+          if (currentValue > zpCurrent) triggered++;
+          break;
+        }
+        case "Рост цены потребительской корзины":
+          if (currentValue > prevValue) triggered++;
+          break;
+        case "Рост рабочих мест":
+          // В вашем описании: увеличение безработных - значит если показатель растёт, индикатор сработал
+          if (currentValue > prevValue) triggered++;
+          break;
+        case "Рост преступности":
+          if (currentValue > prevValue) triggered++;
+          break;
+        case "Рост качества дорог":
+          // Падение качества - если показатель снизился, индикатор сработал
+          if (currentValue < prevValue) triggered++;
+          break;
+        case "Нарушение законов":
+          if (currentValue > 0) triggered++;
+          break;
+        case "Отсутствие открытости действий":
+        case "Противоречивость действий":
+        case "Пассивность":
+          // Предполагаем, что значения от 1 до 10, срабатывает при >=5
+          if (currentValue >= 5) triggered++;
+          break;
+      }
     });
   });
 
-  // Вероятность: доля сработавших индикаторов
   return totalFactors ? Math.round((triggered / totalFactors) * 100) : 0;
 }
 
-// Добавляем ключ ver ко всем регионам
-export default function addProtestVerToAllRegions(regions) {
-  Object.keys(regions).forEach((regionName) => {
-    const region = regions[regionName];
-    region.ver = calcProtestVer(region);
+/**
+ * Добавляет поле ver с вероятностью протестного голосования в каждый регион
+ * @param {Object} regionsData - объект с регионами и их данными (Proxy-объекты)
+ */
+function addProtestVerToAllRegions(regionsData) {
+  Object.entries(regionsData).forEach(([regionName, regionProxy]) => {
+    // regionProxy - Proxy, но можно обращаться как к объекту
+    const ver = calcProtestVer(regionProxy);
+    // Добавляем поле ver в Proxy-объект региона
+    regionProxy.ver = ver;
   });
 }
+
+export default addProtestVerToAllRegions;

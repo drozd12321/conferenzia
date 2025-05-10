@@ -1,6 +1,7 @@
 import useDataStore from "@/store/useDataStore";
 import regions from "@/utils/region";
 import { storeToRefs } from "pinia";
+import addProtestVerToAllRegions from "./useVeroytn";
 export default function useFilterDistrict() {
   const res = {};
   const { getData, getKey } = useDataStore();
@@ -17,6 +18,6 @@ export default function useFilterDistrict() {
       }
     }
   }
-  console.log(res);
+  addProtestVerToAllRegions(res);
   return res;
 }

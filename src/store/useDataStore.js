@@ -17,6 +17,7 @@ const useDataStore = defineStore("data", () => {
   async function sentFilterKey(key = "Все") {
     filterkey.value = key;
   }
+  function addVer() {}
   return { alldata, getData, loadData, sentFilterKey, getKey };
 });
 export default useDataStore;

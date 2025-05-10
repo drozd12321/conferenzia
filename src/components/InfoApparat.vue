@@ -1,5 +1,6 @@
 <template>
   <div class="inf">
+    <h1>Описание структуры:</h1>
     <h2 class="infP" v-if="nameGroup">
       <span>Группа факторов:</span> {{ nameGroup }}
     </h2>
@@ -42,6 +43,10 @@ const getFactorsByName = computed(() => {
 });
 </script>
 <style scoped>
+h1 {
+  font-size: 30px;
+  color: var(--act);
+}
 span {
   color: var(--act);
 }

@@ -22,23 +22,7 @@
     </div>
   </div>
 </template>
-<!-- <div class="infopokaz" :key="curentPage">
-            <div
-              class="pokaz"
-              v-for="[value, key] in paginatedEntries"
-              :key="key"
-            >
-              <p>{{ value }}</p>
-              <p>{{ key }}</p>
-            </div>
-          </div> -->
-<!-- <ThePagination
-          :curentPage="curentPage"
-          :totalPage="totalPage"
-          @prev="curentPage > 1 && curentPage--"
-          @next="curentPage < totalPage && curentPage++"
-          @go="(page) => (curentPage = page)"
-        /> -->
+
 <script setup>
 import useDataOneRegion from "@/use/UseDataOneRedion";
 import { computed, ref } from "vue";
@@ -65,43 +49,8 @@ const entries = computed(() => {
 const nameMenu = computed(() => {
   return getNameFilter.value;
 });
-const nameGroup = computed(() => {
-  return getnameGroup.value;
-});
-const paginatedEntries = computed(() => {
-  const start = (curentPage.value - 1) * itemPerPage;
-  const end = start + itemPerPage;
-  return entries.value.slice(start, end);
-});
-const totalPage = computed(() => {
-  return Math.ceil(entries.value.length / itemPerPage);
-});
-// const chartData = ref({
-//   labels: infl.map((it) => it),
-//   datasets: [
-//     {
-//       label: "Рост З/П",
-//       data: inflVak.map((it) => it),
-//       backgroundColor: ["white", "blue", "red"],
-//       borderRadius: 4,
-//     },
-//   ],
-// });
 
-// const chartOptions = ref({
-//   responsive: true,
-//   maintainAspectRatio: false,
-//   plugins: {
-//     legend: {
-//       position: "bottom",
-//     },
-//     title: {
-//       display: true,
-//       text: "Рост З/П",
-//     },
-//   },
 const chartKeysAndValues = computed(() => {
-  // При изменении data.value[0] или nameMenu.value будет заново вызван useDataKeys
   return useDataKeys(data.value[0], nameMenu.value);
 });
 
@@ -124,7 +73,7 @@ const chartOptions = computed(() => ({
     legend: { position: "bottom" },
     title: {
       display: true,
-      text: nameMenu.value, // Динамический заголовок
+      text: nameMenu.value,
     },
   },
   scales: {

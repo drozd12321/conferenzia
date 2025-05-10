@@ -1,10 +1,10 @@
 <template>
   <header>
-    <h1 class="h1">Моя система</h1>
+    <h1 class="h1">Модуль расчета вероятности протестного голосования</h1>
     <div class="glavn">
       <router-link to="/"><span>Главная</span></router-link>
     </div>
-    <div class="one">
+    <!-- <div class="one">
       <router-link to="/punctone"><span>Пункт1</span></router-link>
     </div>
     <div class="two">
@@ -12,7 +12,7 @@
     </div>
     <div class="three">
       <router-link to="/punctthree"><span>Пункт3</span></router-link>
-    </div>
+    </div> -->
   </header>
 </template>
 <script setup>

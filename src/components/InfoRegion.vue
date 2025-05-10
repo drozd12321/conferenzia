@@ -70,7 +70,7 @@ const chartOptions = computed(() => ({
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
-    legend: { position: "bottom" },
+    legend: { position: "bottom", display: false },
     title: {
       display: true,
       text: nameMenu.value,

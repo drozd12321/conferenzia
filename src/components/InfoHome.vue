@@ -15,6 +15,7 @@
           >
             <RowTable
               :sub="cityName"
+              :znach="cityData.ver"
               :subValue="cityName"
               :active="activeEl === cityName"
               @hover="handleActiv"

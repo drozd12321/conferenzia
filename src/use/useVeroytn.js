@@ -53,7 +53,7 @@ function calcProtestVer(regionData) {
     });
   });
 
-  return totalFactors ? Math.round((triggered / totalFactors) * 100) : 0;
+  return totalFactors ? Math.round((triggered / totalFactors) * 100) / 100 : 0;
 }
 
 function addProtestVerToAllRegions(regionsData) {

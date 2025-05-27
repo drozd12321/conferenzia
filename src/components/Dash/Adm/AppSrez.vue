@@ -1,5 +1,10 @@
 <template>
-  <div>Срезы</div>
+  <div>
+    Срезы
+    <AppSrezYears />
+  </div>
 </template>
-<script setup></script>
+<script setup>
+import AppSrezYears from "./AppSrezYears.vue";
+</script>
 <style scoped></style>

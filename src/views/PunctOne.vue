@@ -1,4 +1,8 @@
 <template>
-  <div class="w-24 text-amber-700 bg-red-600">PunctOne</div>
+  <div class="w-full">
+    <Daschboadr />
+  </div>
 </template>
-<script setup></script>
+<script setup>
+import Daschboadr from "@/components/Dash/Daschboadr.vue";
+</script>

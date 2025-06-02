@@ -1,6 +1,5 @@
 <template>
   <div class="w-full">
-    <h1 class="text-center text-3xl mt-1">Дашборд</h1>
     <div class="container">
       <div class="adm"><AppSrez /></div>
       <div class="chart"><ContainerChart /></div>
@@ -14,7 +13,8 @@ import ContainerChart from "./ContainerChart.vue";
 <style scoped>
 .container {
   display: grid;
-  grid-template-columns: 35% 1fr;
+  grid-template-columns: 15% 1fr;
   gap: 5px;
+  text-align: center;
 }
 </style>

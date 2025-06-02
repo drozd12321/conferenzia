@@ -1,11 +1,14 @@
 <template>
   <div>
+    <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}</h2>
     <div class="info">
       <div class="accord">
         <AppAccordion />
       </div>
+      <div class="infApp">
+        <InfoApparat />
+      </div>
       <div>
-        <h2 class="h2">{{ nameregion }} {{ data.federalDistr }}</h2>
         <transition name="fade" mode="out-in">
           <BarChart
             v-if="nameMenu"
@@ -15,9 +18,6 @@
           />
           <div v-else>Выберите фактор</div>
         </transition>
-      </div>
-      <div class="infApp">
-        <InfoApparat />
       </div>
     </div>
   </div>
@@ -60,6 +60,7 @@ const chartData = computed(() => ({
     {
       label: nameMenu.value,
       data: chartKeysAndValues.value.values.map((it) => it),
+      borderColor: "white",
       backgroundColor: ["white", "blue", "red"],
       borderRadius: 4,
     },
@@ -117,18 +118,17 @@ p {
   height: 200px;
 }
 .info {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1.5fr 2fr 1fr; /* например, первая колонка меньше */
+  gap: 10px;
   width: 98%;
-  height: auto;
-  grid-template-areas: "h2 h2 h2" "infopokaz infopokaz infopokaz";
-  margin: 25px auto;
   background-color: var(--contentfon);
   border-radius: 8px;
   padding: 20px;
   color: var(--content-color);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.5s ease;

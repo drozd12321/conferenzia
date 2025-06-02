@@ -1,6 +1,12 @@
 <template>
   <div class="div">
-    <Bar :data="chartData" :options="chartOptions"></Bar>
+    <Chart
+      type="line"
+      :data="chartData"
+      :options="chartOptions"
+      class="h-[25rem]"
+    />
+    <!-- <Bar :data="chartData" :options="chartOptions"></Bar> -->
   </div>
 </template>
 <script setup>
@@ -19,6 +25,7 @@ import {
   CategoryScale,
   LinearScale,
 } from "chart.js";
+import Chart from "primevue/chart";
 ChartJS.register(
   Title,
   Tooltip,

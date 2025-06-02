@@ -5,7 +5,7 @@
       :type="chartType"
       :data="chartData"
       :options="chartOptions"
-      class="h-[30rem]"
+      class="h-[20rem] w-[20rem]"
     />
   </div>
 </template>
@@ -16,8 +16,6 @@ import Chart from "primevue/chart";
 import transformRegionData from "@/utils/dash/transformDataRegion";
 import useDataStore from "@/store/useDataStore";
 import { storeToRefs } from "pinia";
-
-// Пропсы: название региона и тип графика
 const props = defineProps({
   regionName: {
     type: String,
@@ -25,7 +23,7 @@ const props = defineProps({
   },
   chartType: {
     type: String,
-    default: "line", // например, 'line', 'bar', 'radar' и др.
+    default: "line",
   },
   selectedFactor: {
     type: String,
@@ -42,7 +40,6 @@ const transformedData = computed(() => {
   return transformRegionData(dataAll.value[props.regionName]);
 });
 
-// Подготовка данных для графика по выбранному фактору
 const chartData = computed(() => {
   const factorData = transformedData.value[props.selectedFactor];
   if (!factorData) return { labels: [], datasets: [] };

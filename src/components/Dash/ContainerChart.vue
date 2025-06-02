@@ -5,6 +5,11 @@
       :selectedFactor="'Рост цен на жилье'"
       chartType="line"
     />
+    <AppChartVue
+      regionName="Москва и Московская область"
+      :selectedFactor="'Рост цен на жилье'"
+      chartType="line"
+    />
   </div>
 </template>
 <script setup>
@@ -13,7 +18,7 @@ import AppChartVue from "./Chart/AppChartVue.vue";
 <style scoped>
 .w-fu {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
   max-width: 100vw;
   max-height: 600px;

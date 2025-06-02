@@ -6,7 +6,6 @@
       :options="chartOptions"
       class="h-[25rem]"
     />
-    <!-- <Bar :data="chartData" :options="chartOptions"></Bar> -->
   </div>
 </template>
 <script setup>

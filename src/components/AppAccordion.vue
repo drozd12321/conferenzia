@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Структура Критериально-оценочного аппарата</h1>
+    <h1 v-if="!type">Структура Критериально-оценочного аппарата</h1>
     <PanelMenu :model="items" @item-click="onItemSelect"></PanelMenu>
   </div>
 </template>
@@ -8,6 +8,9 @@
 import PanelMenu from "primevue/panelmenu";
 import useApparatStore from "@/store/useApparatStore";
 import { ref } from "vue";
+const props = defineProps({
+  type: { type: Boolean, default: false },
+});
 const storeApp = useApparatStore();
 function onItemSelect(event) {
   console.log(event.item.label);

@@ -40,12 +40,6 @@ const route = useRoute();
 const { getNameFilter, getnameGroup } = storeToRefs(useApparatStore());
 const nameregion = route.params.name;
 const data = computed(() => useDataOneRegion(nameregion));
-const itemPerPage = 3;
-const curentPage = ref(1);
-const entries = computed(() => {
-  if (!data.value || !data.value[0]) return [];
-  return Object.entries(data.value[0]);
-});
 const nameMenu = computed(() => {
   return getNameFilter.value;
 });

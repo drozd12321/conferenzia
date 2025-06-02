@@ -1,7 +1,8 @@
 <template>
   <div class="card">
+    <h3>{{ regionName }}</h3>
     <Chart
-      type="line"
+      :type="chartType"
       :data="chartData"
       :options="chartOptions"
       class="h-[30rem]"
@@ -10,77 +11,83 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { computed, toRef } from "vue";
+import Chart from "primevue/chart";
+import transformRegionData from "@/utils/dash/transformDataRegion";
+import useDataStore from "@/store/useDataStore";
+import { storeToRefs } from "pinia";
 
-onMounted(() => {
-  chartData.value = setChartData();
-  chartOptions.value = setChartOptions();
+// Пропсы: название региона и тип графика
+const props = defineProps({
+  regionName: {
+    type: String,
+    required: true,
+  },
+  chartType: {
+    type: String,
+    default: "line", // например, 'line', 'bar', 'radar' и др.
+  },
+  selectedFactor: {
+    type: String,
+    required: true,
+  },
 });
 
-const chartData = ref();
-const chartOptions = ref();
+const { getData } = storeToRefs(useDataStore());
+const dataAll = toRef(getData);
 
-const setChartData = () => {
-  const documentStyle = getComputedStyle(document.documentElement);
+// Трансформация данных выбранного региона
+const transformedData = computed(() => {
+  if (!dataAll.value || !dataAll.value[props.regionName]) return {};
+  return transformRegionData(dataAll.value[props.regionName]);
+});
+
+// Подготовка данных для графика по выбранному фактору
+const chartData = computed(() => {
+  const factorData = transformedData.value[props.selectedFactor];
+  if (!factorData) return { labels: [], datasets: [] };
+
+  const labels = Object.keys(factorData).sort();
+  const data = labels.map((year) => factorData[year]);
 
   return {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels,
     datasets: [
       {
-        label: "First Dataset",
-        data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        borderColor: documentStyle.getPropertyValue("--p-cyan-500"),
-        tension: 0.4,
-      },
-      {
-        label: "Second Dataset",
-        data: [28, 48, 40, 19, 86, 27, 90],
-        fill: false,
-        borderColor: documentStyle.getPropertyValue("--p-gray-500"),
+        label: props.selectedFactor,
+        data,
+        borderColor: "white",
+        backgroundColor: "rgba(255,255,255,0.3)",
+        fill: true,
         tension: 0.4,
       },
     ],
   };
-};
-const setChartOptions = () => {
-  const documentStyle = getComputedStyle(document.documentElement);
-  const textColor = documentStyle.getPropertyValue("--p-text-color");
-  const textColorSecondary = documentStyle.getPropertyValue(
-    "--p-text-muted-color"
-  );
-  const surfaceBorder = documentStyle.getPropertyValue(
-    "--p-content-border-color"
-  );
+});
 
-  return {
-    maintainAspectRatio: false,
-    aspectRatio: 0.6,
-    plugins: {
-      legend: {
-        labels: {
-          color: textColor,
-        },
-      },
+const chartOptions = computed(() => ({
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: { position: "bottom", display: true },
+    title: {
+      display: true,
+      text: `${props.regionName} — ${props.selectedFactor}`,
     },
-    scales: {
-      x: {
-        ticks: {
-          color: textColorSecondary,
-        },
-        grid: {
-          color: surfaceBorder,
-        },
-      },
-      y: {
-        ticks: {
-          color: textColorSecondary,
-        },
-        grid: {
-          color: surfaceBorder,
-        },
-      },
+  },
+  scales: {
+    y: {
+      title: { display: true, text: "%" },
+      grid: { color: "gray" },
     },
-  };
-};
+  },
+}));
 </script>
+
+<style scoped>
+.card {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+</style>

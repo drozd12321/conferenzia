@@ -1,6 +1,5 @@
 <template>
   <div class="card">
-    <h3>{{ regionName }}</h3>
     <Chart
       :type="chartType"
       :data="chartData"
@@ -13,6 +12,7 @@
 <script setup>
 import { computed, toRef } from "vue";
 import Chart from "primevue/chart";
+
 import transformRegionData from "@/utils/dash/transformDataRegion";
 import useDataStore from "@/store/useDataStore";
 import { storeToRefs } from "pinia";
@@ -41,35 +41,54 @@ function stringToColor(str) {
   const c = (hash & 0x00ffffff).toString(16).toUpperCase();
   return "#" + "00000".substring(0, 6 - c.length) + c;
 }
-
 const borderColor = stringToColor(props.selectedFactor);
 
-// Трансформация данных выбранного региона
 const transformedData = computed(() => {
   if (!dataAll.value || !dataAll.value[props.regionName]) return {};
   return transformRegionData(dataAll.value[props.regionName]);
 });
+const COLORS = ["#3366CC", "#DC3912", "#FF9900"];
 
 const chartData = computed(() => {
   const factorData = transformedData.value[props.selectedFactor];
   if (!factorData) return { labels: [], datasets: [] };
-
   const labels = Object.keys(factorData).sort();
   const data = labels.map((year) => factorData[year]);
-
-  return {
-    labels,
-    datasets: [
-      {
-        label: props.selectedFactor,
-        data,
-        borderColor: "white",
-        backgroundColor: borderColor + "80",
-        fill: true,
-        tension: 0.4,
-      },
-    ],
-  };
+  if (props.chartType === "pie" || props.chartType === "bar") {
+    // Используем три цвета по порядку
+    const backgroundColors = labels.map(
+      (_, i) => COLORS[i % COLORS.length] + "80"
+    );
+    return {
+      labels,
+      datasets: [
+        {
+          label: props.selectedFactor,
+          data,
+          backgroundColor: backgroundColors,
+          borderColor: backgroundColors.map((color) =>
+            color.replace("80", "FF")
+          ),
+          borderWidth: 1,
+        },
+      ],
+    };
+  } else {
+    // Для line/bar — если нужно три цвета для трёх разных серий:
+    return {
+      labels,
+      datasets: [
+        {
+          label: props.selectedFactor,
+          data,
+          borderColor: COLORS[0],
+          backgroundColor: COLORS[0] + "80",
+          fill: true,
+          tension: 0.4,
+        },
+      ],
+    };
+  }
 });
 
 const chartOptions = computed(() => ({
@@ -82,12 +101,15 @@ const chartOptions = computed(() => ({
       text: `${props.regionName} — ${props.selectedFactor}`,
     },
   },
-  scales: {
-    y: {
-      title: { display: true, text: "%" },
-      grid: { color: "gray" },
-    },
-  },
+  scales:
+    props.chartType === "pie"
+      ? {}
+      : {
+          y: {
+            title: { display: true, text: "%" },
+            grid: { color: "gray" },
+          },
+        },
 }));
 </script>
 

@@ -1,8 +1,7 @@
 <template>
   <h3>Год</h3>
   <Menu
-    :model="items"
-    :activeItem="activeItem"
+    :model="computedItems"
     :style="{ marginTop: '10px', background: '#1e88e5' }"
   />
 </template>
@@ -23,30 +22,16 @@ const items = ref([
 function setYear(value) {
   storeyear.setYear(value);
 }
-const activeItem = computed(() => {
-  return (
-    items.value.find((item) => item.label.trim() === getYear.value) || null
-  );
-});
+const computedItems = computed(() =>
+  items.value.map((item) => ({
+    ...item,
+    class: item.label.trim() === getYear.value.trim() ? "active-menu-item" : "",
+  }))
+);
 </script>
-<style scoped>
-.p-menu.p-component::-webkit-scrollbar {
-  width: 8px;
-}
-
-.p-menu.p-component::-webkit-scrollbar-track {
-  background: #1565c0;
-  border-radius: 4px;
-}
-
-.p-menu.p-component::-webkit-scrollbar-thumb {
-  background-color: #90caf9;
-  border-radius: 4px;
-  border: 2px solid #1565c0;
-}
-
-.p-menu.p-component {
-  scrollbar-width: thin;
-  scrollbar-color: #90caf9 #1565c0;
+<style>
+.active-menu-item > .p-menuitem-link {
+  background-color: #1565c0 !important;
+  color: white !important;
 }
 </style>

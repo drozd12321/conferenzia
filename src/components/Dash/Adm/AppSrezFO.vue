@@ -2,8 +2,7 @@
   <h3>Федеральный округ</h3>
 
   <Menu
-    :model="items"
-    :activeItem="activeItem"
+    :model="computedItems"
     :style="{
       background: '#1e88e5',
       maxHeight: '200px',
@@ -33,9 +32,12 @@ const items = ref([
 function setFO(value) {
   storeFO.setFo(value);
 }
-const activeItem = computed(() => {
-  return items.value.find((item) => item.label.trim() === getFo.value) || null;
-});
+const computedItems = computed(() =>
+  items.value.map((item) => ({
+    ...item,
+    class: item.label.trim() === getFo.value.trim() ? "active-menu-item" : "",
+  }))
+);
 </script>
 
 <style>

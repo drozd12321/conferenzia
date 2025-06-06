@@ -35,7 +35,7 @@ export function filterDataByFO(dataArray) {
 }
 export function filterDataByReg(dataArray) {
   const { getReg } = storeToRefs(useSrezRegStore());
-  console.log(dataArray);
+  console.log("dataArray");
   if (!getReg.value || getReg.value === "Сбросить") {
     return dataArray;
   }

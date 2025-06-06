@@ -166,7 +166,6 @@ const dataDoneInfl = computed(() => filterDataAgr(agrData.value, "Инфляци
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #4a90e2 #f0f0f0;
-
   grid-template-areas:
     "Many Many Many Many Many Many  Row Row Row Zak Zak Zak"
     "PriceKorz PriceKorz PriceKorz Paccive Paccive Paccive PriceHome PriceHome PriceHome PriceHome PriceHome PriceHome"

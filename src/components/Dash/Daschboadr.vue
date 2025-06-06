@@ -41,20 +41,23 @@ function gotoUpload() {
   width: 95%;
   display: flex;
   gap: 1rem;
+  height: 80vh; /* или фиксированное значение */
 }
+
 .adm {
-  flex: 0.15;
+  flex: 0.2;
   position: sticky;
   top: 180px;
-  align-self: start;
-  height: fit-content;
+  align-self: flex-start; /* важно для sticky в flex */
+
+  max-height: calc(80vh - 180px); /* чтобы не выходил за пределы */
+  overflow-y: auto; /* если содержимое больше */
 }
 
 .chart {
-  flex: 1;
-  background-color: var(--contentfon);
-  margin-top: 10px;
+  flex: 1.2;
 }
+
 .upload-icon {
   cursor: pointer;
   color: #bbb;

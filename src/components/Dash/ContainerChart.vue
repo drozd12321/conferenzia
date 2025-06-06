@@ -124,26 +124,42 @@ function prepareChartsData(data) {
 }
 const chartsData = ref(prepareChartsData(dataAll.value));
 const filteredChartsData = computed(() => {
-  return chartsData.value.filter((n) => n && n.selectedFactor !== "undefined");
+  return filterDataByYear(chartsData.value).filter(
+    (n) => n && n.selectedFactor !== "undefined"
+  );
 });
-const agrData = aggregatePercentGrowth(filteredChartsData.value);
-const dataDonePriceHome = filterDataAgr(agrData, "Рост цен на жилье");
-const dataDonePriceKorz = filterDataAgr(
-  agrData,
-  "Рост цены потребительской корзины"
+const agrData = computed(() =>
+  aggregatePercentGrowth(filteredChartsData.value)
 );
-const dataDoneJob = filterDataAgr(agrData, "Рост рабочих мест");
-const dataDoneMany = filterDataAgr(agrData, "Рост З/П");
-const dataDonePrest = filterDataAgr(agrData, "Рост преступности");
-const dataDoneRow = filterDataAgr(agrData, "Рост качества дорог");
-const dataDoneZak = filterDataAgr(agrData, "Нарушение законов");
-const dataDoneOpen = filterDataAgr(agrData, "Отсутствие открытости действий");
-const dataDoneVlast = filterDataAgr(
-  agrData,
-  "Противоречивость действий властей"
+const dataDonePriceHome = computed(() =>
+  filterDataAgr(agrData.value, "Рост цен на жилье")
 );
-const dataDonePaccive = filterDataAgr(agrData, "Пассивность властей");
-const dataDoneInfl = filterDataAgr(agrData, "Инфляция");
+const dataDonePriceKorz = computed(() =>
+  filterDataAgr(agrData.value, "Рост цены потребительской корзины")
+);
+const dataDoneJob = computed(() =>
+  filterDataAgr(agrData.value, "Рост рабочих мест")
+);
+const dataDoneMany = computed(() => filterDataAgr(agrData.value, "Рост З/П"));
+const dataDonePrest = computed(() =>
+  filterDataAgr(agrData.value, "Рост преступности")
+);
+const dataDoneRow = computed(() =>
+  filterDataAgr(agrData.value, "Рост качества дорог")
+);
+const dataDoneZak = computed(() =>
+  filterDataAgr(agrData.value, "Нарушение законов")
+);
+const dataDoneOpen = computed(() =>
+  filterDataAgr(agrData.value, "Отсутствие открытости действий")
+);
+const dataDoneVlast = computed(() =>
+  filterDataAgr(agrData.value, "Противоречивость действий властей")
+);
+const dataDonePaccive = computed(() =>
+  filterDataAgr(agrData.value, "Пассивность властей")
+);
+const dataDoneInfl = computed(() => filterDataAgr(agrData.value, "Инфляция"));
 </script>
 <style scoped>
 .w-fu {

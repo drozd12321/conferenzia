@@ -69,7 +69,7 @@ const chartData = computed(() => {
           borderColor: borderColors,
           borderWidth: 2,
           hoverOffset: 30,
-          borderRadius: 10,
+          borderRadius: 5,
         },
       ],
     };
@@ -149,7 +149,7 @@ const chartOptions = computed(() => ({
     },
   },
   scales:
-    props.chartType === "pie"
+    props.chartType === "pie" || props.chartType === "doughnut"
       ? {}
       : {
           x: {

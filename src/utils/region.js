@@ -1108,3 +1108,12 @@ const regions = ref([
   },
 ]);
 export default regions.value;
+
+// Сформировать массив для выпадающего списка
+export const items = ref([
+  { label: "Сбросить", fo: "Сбросить" },
+  ...regions.value.map((region) => ({
+    label: region.name,
+    fo: region.federalDistrict,
+  })),
+]);

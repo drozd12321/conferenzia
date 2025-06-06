@@ -1,5 +1,5 @@
 <template>
-  <h3>Год</h3>
+  <h3>Субьект РФ</h3>
   <Srex :items="items" @year="setYear" />
 </template>
 
@@ -7,16 +7,10 @@
 import { Menu } from "primevue";
 import { computed, ref } from "vue";
 import useSrezYearStore from "@/store/useSrezYearsStore";
-import { storeToRefs } from "pinia";
 import Srex from "./Srex.vue";
+import { items } from "../../../utils/region";
 const storeyear = useSrezYearStore();
-const { getYear } = storeToRefs(useSrezYearStore());
-const items = ref([
-  { label: "Сбросить" },
-  { label: "2022 " },
-  { label: "2023 " },
-  { label: "2024 " },
-]);
+
 function setYear(value) {
   storeyear.setYear(value);
 }

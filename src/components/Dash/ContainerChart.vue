@@ -1,11 +1,55 @@
 <template>
   <div class="w-fu">
     <AppChartVue
-      v-for="n in filteredChartsData"
-      :key="n.regionName + n.selectedFactor"
-      :regionName="n.regionName"
-      :selectedFactor="n.selectedFactor"
-      :chartType="n.chartType"
+      :selectedFactor="dataDonePriceHome.selectedFactor"
+      :dataArray="dataDonePriceHome.data"
+      chartType="line"
+    />
+    <AppChartVue
+      :selectedFactor="dataDonePriceKorz.selectedFactor"
+      :dataArray="dataDonePriceKorz.data"
+    />
+    <AppChartVue
+      :selectedFactor="dataDoneJob.selectedFactor"
+      :dataArray="dataDoneJob.data"
+    />
+    <AppChartVue
+      :selectedFactor="dataDoneMany.selectedFactor"
+      :dataArray="dataDoneMany.data"
+    />
+    <AppChartVue
+      :selectedFactor="dataDonePrest.selectedFactor"
+      :dataArray="dataDonePrest.data"
+      chartType="bar"
+    />
+    <AppChartVue
+      :selectedFactor="dataDoneRow.selectedFactor"
+      :dataArray="dataDoneRow.data"
+      chartType="bar"
+    />
+    <AppChartVue
+      :selectedFactor="dataDoneZak.selectedFactor"
+      :dataArray="dataDoneZak.data"
+      chartType="pie"
+    />
+    <AppChartVue
+      :selectedFactor="dataDoneOpen.selectedFactor"
+      :dataArray="dataDoneOpen.data"
+      chartType="pie"
+    />
+    <AppChartVue
+      :selectedFactor="dataDoneVlast.selectedFactor"
+      :dataArray="dataDoneVlast.data"
+      chartType="pie"
+    />
+    <AppChartVue
+      :selectedFactor="dataDonePaccive.selectedFactor"
+      :dataArray="dataDonePaccive.data"
+      chartType="pie"
+    />
+    <AppChartVue
+      :selectedFactor="dataDoneInfl.selectedFactor"
+      :dataArray="dataDoneInfl.data"
     />
   </div>
 </template>
@@ -14,6 +58,7 @@ import { storeToRefs } from "pinia";
 import AppChartVue from "./Chart/AppChartVue.vue";
 import useDataStore from "@/store/useDataStore";
 import { computed, ref } from "vue";
+import { aggregatePercentGrowth, filterDataAgr } from "./Chart/helper";
 const { getData } = storeToRefs(useDataStore());
 const dataAll = computed(() => getData.value);
 function prepareChartsData(data) {
@@ -58,6 +103,24 @@ const chartsData = ref(prepareChartsData(dataAll.value));
 const filteredChartsData = computed(() => {
   return chartsData.value.filter((n) => n && n.selectedFactor !== "undefined");
 });
+const agrData = aggregatePercentGrowth(filteredChartsData.value);
+const dataDonePriceHome = filterDataAgr(agrData, "Рост цен на жилье");
+const dataDonePriceKorz = filterDataAgr(
+  agrData,
+  "Рост цены потребительской корзины"
+);
+const dataDoneJob = filterDataAgr(agrData, "Рост рабочих мест");
+const dataDoneMany = filterDataAgr(agrData, "Рост З/П");
+const dataDonePrest = filterDataAgr(agrData, "Рост преступности");
+const dataDoneRow = filterDataAgr(agrData, "Рост качества дорог");
+const dataDoneZak = filterDataAgr(agrData, "Нарушение законов");
+const dataDoneOpen = filterDataAgr(agrData, "Отсутствие открытости действий");
+const dataDoneVlast = filterDataAgr(
+  agrData,
+  "Противоречивость действий властей"
+);
+const dataDonePaccive = filterDataAgr(agrData, "Пассивность властей");
+const dataDoneInfl = filterDataAgr(agrData, "Инфляция");
 </script>
 <style scoped>
 .w-fu {

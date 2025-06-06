@@ -10,15 +10,12 @@
 </template>
 
 <script setup>
-import { computed, toRef } from "vue";
+import { computed } from "vue";
 import Chart from "primevue/chart";
 
-import transformRegionData from "@/utils/dash/transformDataRegion";
-import useDataStore from "@/store/useDataStore";
-import { storeToRefs } from "pinia";
 const props = defineProps({
-  regionName: {
-    type: String,
+  dataArray: {
+    type: Array,
     required: true,
   },
   chartType: {
@@ -29,36 +26,35 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  colors: {
+    type: Array,
+    default: () => ["#3366CC", "#DC3912", "#FF9900"], // дефолтные цвета
+  },
 });
 
-const { getData } = storeToRefs(useDataStore());
-const dataAll = toRef(getData);
-function stringToColor(str) {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+function createGradient(ctx, area, color) {
+  if (!area) {
+    return color + "cc";
   }
-  const c = (hash & 0x00ffffff).toString(16).toUpperCase();
-  return "#" + "00000".substring(0, 6 - c.length) + c;
+  const gradient = ctx.createLinearGradient(0, area.bottom, 0, area.top);
+  gradient.addColorStop(0, color + "00");
+  gradient.addColorStop(1, color + "cc");
+  return gradient;
 }
-const borderColor = stringToColor(props.selectedFactor);
-
-const transformedData = computed(() => {
-  if (!dataAll.value || !dataAll.value[props.regionName]) return {};
-  return transformRegionData(dataAll.value[props.regionName]);
-});
-const COLORS = ["#3366CC", "#DC3912", "#FF9900"];
 
 const chartData = computed(() => {
-  const factorData = transformedData.value[props.selectedFactor];
-  if (!factorData) return { labels: [], datasets: [] };
-  const labels = Object.keys(factorData).sort();
-  const data = labels.map((year) => factorData[year]);
+  const labels = props.dataArray.map((d) => d.year);
+  const data = props.dataArray.map((d) => d.value);
+
+  const baseColor = props.colors[0];
+  const backgroundColors = labels.map(
+    (_, i) => props.colors[i % props.colors.length] + "80"
+  );
+  const borderColors = labels.map(
+    (_, i) => props.colors[i % props.colors.length]
+  );
+
   if (props.chartType === "pie" || props.chartType === "bar") {
-    // Используем три цвета по порядку
-    const backgroundColors = labels.map(
-      (_, i) => COLORS[i % COLORS.length] + "80"
-    );
     return {
       labels,
       datasets: [
@@ -66,25 +62,32 @@ const chartData = computed(() => {
           label: props.selectedFactor,
           data,
           backgroundColor: backgroundColors,
-          borderColor: backgroundColors.map((color) =>
-            color.replace("80", "FF")
-          ),
-          borderWidth: 1,
+          borderColor: borderColors,
+          borderWidth: 2,
+          hoverOffset: 30,
         },
       ],
     };
   } else {
-    // Для line/bar — если нужно три цвета для трёх разных серий:
     return {
       labels,
       datasets: [
         {
           label: props.selectedFactor,
           data,
-          borderColor: COLORS[0],
-          backgroundColor: COLORS[0] + "80",
+          borderColor: baseColor,
+          backgroundColor: (context) => {
+            const chart = context.chart;
+            const { ctx, chartArea } = chart;
+            return createGradient(ctx, chartArea, baseColor);
+          },
           fill: true,
           tension: 0.4,
+          pointRadius: 5,
+          pointHoverRadius: 8,
+          borderWidth: 3,
+          hoverBorderWidth: 4,
+          hoverBackgroundColor: baseColor + "cc",
         },
       ],
     };
@@ -94,20 +97,89 @@ const chartData = computed(() => {
 const chartOptions = computed(() => ({
   responsive: true,
   maintainAspectRatio: false,
+  animation: {
+    duration: 1000,
+    easing: "easeOutQuart",
+  },
   plugins: {
-    legend: { position: "bottom", display: true },
+    legend: {
+      position: "bottom",
+      labels: {
+        font: {
+          size: 14,
+          weight: "600",
+          family: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        },
+        color: "#333",
+      },
+    },
     title: {
       display: true,
-      text: `${props.regionName} — ${props.selectedFactor}`,
+      text: props.selectedFactor,
+      font: {
+        size: 18,
+        weight: "700",
+      },
+      color: "#222",
+      padding: {
+        top: 10,
+        bottom: 20,
+      },
+    },
+    tooltip: {
+      enabled: true,
+      mode: "nearest",
+      intersect: false,
+      backgroundColor: "#fff",
+      titleColor: "#000",
+      bodyColor: "#333",
+      borderColor: "#ddd",
+      borderWidth: 1,
+      cornerRadius: 6,
+      padding: 10,
+      displayColors: false,
+      bodyFont: {
+        size: 14,
+      },
     },
   },
   scales:
     props.chartType === "pie"
       ? {}
       : {
+          x: {
+            grid: {
+              display: false,
+            },
+            ticks: {
+              font: {
+                size: 13,
+              },
+              color: "#666",
+            },
+          },
           y: {
-            title: { display: true, text: "%" },
-            grid: { color: "gray" },
+            beginAtZero: true,
+            grid: {
+              color: "#eee",
+              borderDash: [5, 5],
+            },
+            ticks: {
+              font: {
+                size: 13,
+              },
+              color: "#666",
+              callback: (value) => value + "%",
+            },
+            title: {
+              display: true,
+              text: "%",
+              font: {
+                size: 14,
+                weight: "600",
+              },
+              color: "#444",
+            },
           },
         },
 }));
@@ -118,5 +190,9 @@ const chartOptions = computed(() => ({
   width: 100%;
   max-width: 700px;
   margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.1);
 }
 </style>

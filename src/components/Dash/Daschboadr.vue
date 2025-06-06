@@ -17,7 +17,6 @@ import ContainerChart from "./ContainerChart.vue";
 .adm {
   flex: 0.15;
 }
-
 .chart {
   flex: 1;
   background-color: var(--contentfon);

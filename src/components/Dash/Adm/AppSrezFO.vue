@@ -1,14 +1,6 @@
 <template>
   <h3>Федеральный округ</h3>
-
-  <Menu
-    :model="computedItems"
-    :style="{
-      background: '#1e88e5',
-      maxHeight: '200px',
-      overflowY: 'auto',
-    }"
-  />
+  <Srex :items="items" @year="setFO" />
 </template>
 
 <script setup>
@@ -16,28 +8,23 @@ import { Menu } from "primevue";
 import { computed, ref } from "vue";
 import useSrezFoStore from "@/store/useSrezFoStore";
 import { storeToRefs } from "pinia";
+import Srex from "./Srex.vue";
 const storeFO = useSrezFoStore();
 const { getFo } = storeToRefs(useSrezFoStore());
 const items = ref([
-  { label: "Сбросить", command: () => setFO("Сбросить") },
-  { label: "СЗФО ", command: () => setFO("СЗФО") },
-  { label: "ЮФО ", command: () => setFO("ЮФО") },
-  { label: "СФО ", command: () => setFO("СФО") },
-  { label: "ЦФО ", command: () => setFO("ЦФО") },
-  { label: "ПФО ", command: () => setFO("ПФО") },
-  { label: "УФО ", command: () => setFO("УФО") },
-  { label: "ДФО ", command: () => setFO("ДФО") },
-  { label: "СКФО ", command: () => setFO("СКФО") },
+  { label: "Сбросить" },
+  { label: "СЗФО " },
+  { label: "ЮФО " },
+  { label: "СФО " },
+  { label: "ЦФО " },
+  { label: "ПФО " },
+  { label: "УФО " },
+  { label: "ДФО " },
+  { label: "СКФО " },
 ]);
 function setFO(value) {
   storeFO.setFo(value);
 }
-const computedItems = computed(() =>
-  items.value.map((item) => ({
-    ...item,
-    class: item.label.trim() === getFo.value.trim() ? "active-menu-item" : "",
-  }))
-);
 </script>
 
 <style>

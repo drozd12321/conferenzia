@@ -4,7 +4,7 @@
       :type="chartType"
       :data="chartData"
       :options="chartOptions"
-      class="h-[20rem] w-[20rem]"
+      class="w-full h-full"
     />
   </div>
 </template>
@@ -54,7 +54,11 @@ const chartData = computed(() => {
     (_, i) => props.colors[i % props.colors.length]
   );
 
-  if (props.chartType === "pie" || props.chartType === "bar") {
+  if (
+    props.chartType === "pie" ||
+    props.chartType === "bar" ||
+    props.chartType === "doughnut"
+  ) {
     return {
       labels,
       datasets: [
@@ -188,7 +192,7 @@ const chartOptions = computed(() => ({
 <style scoped>
 .card {
   width: 100%;
-  max-width: 700px;
+  height: 100%;
   margin: 0 auto;
   background: #ffffff;
   border-radius: 12px;

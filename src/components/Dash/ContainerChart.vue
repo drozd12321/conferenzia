@@ -1,56 +1,79 @@
 <template>
   <div class="w-fu">
-    <AppChartVue
-      :selectedFactor="dataDonePriceHome.selectedFactor"
-      :dataArray="dataDonePriceHome.data"
-      chartType="line"
-    />
-    <AppChartVue
-      :selectedFactor="dataDonePriceKorz.selectedFactor"
-      :dataArray="dataDonePriceKorz.data"
-    />
-    <AppChartVue
-      :selectedFactor="dataDoneJob.selectedFactor"
-      :dataArray="dataDoneJob.data"
-    />
-    <AppChartVue
-      :selectedFactor="dataDoneMany.selectedFactor"
-      :dataArray="dataDoneMany.data"
-    />
-    <AppChartVue
-      :selectedFactor="dataDonePrest.selectedFactor"
-      :dataArray="dataDonePrest.data"
-      chartType="bar"
-    />
-    <AppChartVue
-      :selectedFactor="dataDoneRow.selectedFactor"
-      :dataArray="dataDoneRow.data"
-      chartType="bar"
-    />
-    <AppChartVue
-      :selectedFactor="dataDoneZak.selectedFactor"
-      :dataArray="dataDoneZak.data"
-      chartType="pie"
-    />
-    <AppChartVue
-      :selectedFactor="dataDoneOpen.selectedFactor"
-      :dataArray="dataDoneOpen.data"
-      chartType="pie"
-    />
-    <AppChartVue
-      :selectedFactor="dataDoneVlast.selectedFactor"
-      :dataArray="dataDoneVlast.data"
-      chartType="pie"
-    />
-    <AppChartVue
-      :selectedFactor="dataDonePaccive.selectedFactor"
-      :dataArray="dataDonePaccive.data"
-      chartType="pie"
-    />
-    <AppChartVue
-      :selectedFactor="dataDoneInfl.selectedFactor"
-      :dataArray="dataDoneInfl.data"
-    />
+    <div class="PriceHome">
+      <AppChartVue
+        :selectedFactor="dataDonePriceHome.selectedFactor"
+        :dataArray="dataDonePriceHome.data"
+        chartType="line"
+      />
+    </div>
+    <div class="PriceKorz">
+      <AppChartVue
+        :selectedFactor="dataDonePriceKorz.selectedFactor"
+        :dataArray="dataDonePriceKorz.data"
+      />
+    </div>
+    <div class="Job">
+      <AppChartVue
+        :selectedFactor="dataDoneJob.selectedFactor"
+        :dataArray="dataDoneJob.data"
+      />
+    </div>
+    <div class="Many">
+      <AppChartVue
+        :selectedFactor="dataDoneMany.selectedFactor"
+        :dataArray="dataDoneMany.data"
+      />
+    </div>
+    <div class="Prest">
+      <AppChartVue
+        :selectedFactor="dataDonePrest.selectedFactor"
+        :dataArray="dataDonePrest.data"
+        chartType="bar"
+      />
+    </div>
+    <div class="Row">
+      <AppChartVue
+        :selectedFactor="dataDoneRow.selectedFactor"
+        :dataArray="dataDoneRow.data"
+        chartType="bar"
+      />
+    </div>
+    <div class="Zak">
+      <AppChartVue
+        :selectedFactor="dataDoneZak.selectedFactor"
+        :dataArray="dataDoneZak.data"
+        chartType="doughnut"
+      />
+    </div>
+    <div class="Open">
+      <AppChartVue
+        :selectedFactor="dataDoneOpen.selectedFactor"
+        :dataArray="dataDoneOpen.data"
+        chartType="pie"
+      />
+    </div>
+    <div class="Vlast">
+      <AppChartVue
+        :selectedFactor="dataDoneVlast.selectedFactor"
+        :dataArray="dataDoneVlast.data"
+        chartType="pie"
+      />
+    </div>
+    <div class="Paccive">
+      <AppChartVue
+        :selectedFactor="dataDonePaccive.selectedFactor"
+        :dataArray="dataDonePaccive.data"
+        chartType="pie"
+      />
+    </div>
+    <div class="Infl">
+      <AppChartVue
+        :selectedFactor="dataDoneInfl.selectedFactor"
+        :dataArray="dataDoneInfl.data"
+        chartType="bar"
+      />
+    </div>
   </div>
 </template>
 <script setup>
@@ -98,7 +121,6 @@ function prepareChartsData(data) {
 
   return chartsArray;
 }
-
 const chartsData = ref(prepareChartsData(dataAll.value));
 const filteredChartsData = computed(() => {
   return chartsData.value.filter((n) => n && n.selectedFactor !== "undefined");
@@ -125,29 +147,68 @@ const dataDoneInfl = filterDataAgr(agrData, "Инфляция");
 <style scoped>
 .w-fu {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
-  width: 80vw;
-
-  height: 600px;
+  grid-auto-rows: 400px;
+  gap: 1.5rem 1rem;
+  height: 80vh;
   overflow-y: auto;
-  padding: 1rem;
   scrollbar-width: thin;
-  scrollbar-color: #4a90e2 #333232;
+  scrollbar-color: #4a90e2 #f0f0f0;
+
+  grid-template-areas:
+    "Many Many Many Many Many Many  Row Row Row Zak Zak Zak"
+    "PriceKorz PriceKorz PriceKorz Paccive Paccive Paccive PriceHome PriceHome PriceHome PriceHome PriceHome PriceHome"
+    "Infl Infl Infl Infl Infl Infl Open Open Open Job Job Job"
+    "Vlast Vlast Vlast Vlast Vlast Vlast Prest Prest Prest Prest Prest Prest";
 }
+
+.PriceHome {
+  grid-area: PriceHome;
+}
+.PriceKorz {
+  grid-area: PriceKorz;
+}
+.Job {
+  grid-area: Job;
+}
+.Many {
+  grid-area: Many;
+}
+.Prest {
+  grid-area: Prest;
+}
+.Row {
+  grid-area: Row;
+}
+.Zak {
+  grid-area: Zak;
+}
+.Open {
+  grid-area: Open;
+}
+.Vlast {
+  grid-area: Vlast;
+}
+.Paccive {
+  grid-area: Paccive;
+}
+.Infl {
+  grid-area: Infl;
+}
+
+/* Стиль скроллбара для WebKit (Chrome, Safari) */
 .w-fu::-webkit-scrollbar {
   width: 8px;
 }
 
 .w-fu::-webkit-scrollbar-track {
-  background: #e0e0e0;
+  background: #f0f0f0;
   border-radius: 4px;
 }
 
 .w-fu::-webkit-scrollbar-thumb {
   background-color: #4a90e2;
   border-radius: 4px;
-  border: 2px solid #e0e0e0; /* отступы вокруг ползунка */
+  border: 2px solid #f0f0f0;
 }
 
 .w-fu::-webkit-scrollbar-thumb:hover {

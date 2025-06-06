@@ -82,6 +82,7 @@ import AppChartVue from "./Chart/AppChartVue.vue";
 import useDataStore from "@/store/useDataStore";
 import { computed, ref } from "vue";
 import { aggregatePercentGrowth, filterDataAgr } from "./Chart/helper";
+import { filterDataByYear } from "./Adm/utils";
 const { getData } = storeToRefs(useDataStore());
 const dataAll = computed(() => getData.value);
 function prepareChartsData(data) {

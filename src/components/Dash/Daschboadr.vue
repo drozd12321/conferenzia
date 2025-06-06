@@ -49,7 +49,7 @@ function gotoUpload() {
   position: sticky;
   top: 180px;
   align-self: flex-start; /* важно для sticky в flex */
-
+  width: 300px;
   max-height: calc(80vh - 180px); /* чтобы не выходил за пределы */
   overflow-y: auto; /* если содержимое больше */
 }

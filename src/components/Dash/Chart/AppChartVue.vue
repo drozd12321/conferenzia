@@ -195,11 +195,17 @@ const chartOptions = computed(() => ({
 <style scoped>
 .card {
   width: 100%;
-  height: 100%;
+  height: 400px; /* фиксированная высота */
   margin: 0 auto;
-  background: #ffffff;
+  background: #fff;
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 8px 20px rgb(0 0 0 / 0.1);
+  position: relative; /* важно для Chart.js */
+}
+
+.chart-canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
 </style>

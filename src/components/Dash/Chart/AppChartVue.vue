@@ -69,6 +69,7 @@ const chartData = computed(() => {
           borderColor: borderColors,
           borderWidth: 2,
           hoverOffset: 30,
+          borderRadius: 10,
         },
       ],
     };

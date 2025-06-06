@@ -4,7 +4,6 @@
       <AppChartVue
         :selectedFactor="dataDonePriceHome.selectedFactor"
         :dataArray="dataDonePriceHome.data"
-        chartType="line"
       />
     </div>
     <div class="PriceKorz">
@@ -82,24 +81,22 @@ import AppChartVue from "./Chart/AppChartVue.vue";
 import useDataStore from "@/store/useDataStore";
 import { computed, ref } from "vue";
 import { aggregatePercentGrowth, filterDataAgr } from "./Chart/helper";
-import { filterDataByYear } from "./Adm/utils";
+import { filterDataByFO, filterDataByYear } from "./Adm/utils";
 const { getData } = storeToRefs(useDataStore());
 const dataAll = computed(() => getData.value);
 function prepareChartsData(data) {
   const chartsArray = [];
   const chartTypes = ["line", "bar", "pie"];
-
   let chartTypeIndex = 0;
-
+  console.log(data);
   for (const regionName in data) {
     const factorsData = data[regionName]["0"];
+    const federalDistrict = data[regionName].federalDistr;
     const factorNamesSet = new Set();
-
     for (const key in factorsData) {
       const factorName = key.replace(/\s+за\s+\d{4}\s+год$/, "").trim();
       factorNamesSet.add(factorName);
     }
-
     factorNamesSet.forEach((factorName) => {
       const factorData = Object.entries(factorsData)
         .filter(([key]) => key.startsWith(factorName))
@@ -108,14 +105,13 @@ function prepareChartsData(data) {
           return year && value !== undefined ? { year, value } : null;
         })
         .filter((item) => item !== null);
-
       chartsArray.push({
         regionName,
         selectedFactor: factorName,
         data: factorData,
+        federalDistrict,
         chartType: chartTypes[chartTypeIndex % chartTypes.length], // Циклически выбираем тип
       });
-
       chartTypeIndex++;
     });
   }
@@ -124,7 +120,7 @@ function prepareChartsData(data) {
 }
 const chartsData = ref(prepareChartsData(dataAll.value));
 const filteredChartsData = computed(() => {
-  return filterDataByYear(chartsData.value).filter(
+  return filterDataByFO(chartsData.value).filter(
     (n) => n && n.selectedFactor !== "undefined"
   );
 });

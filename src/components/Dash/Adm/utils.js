@@ -1,3 +1,4 @@
+import useSrezFoStore from "@/store/useSrezFoStore";
 import useSrezYearStore from "@/store/useSrezYearsStore";
 import { storeToRefs } from "pinia";
 
@@ -15,5 +16,19 @@ export function filterDataByYear(dataArray) {
       ...item,
       data: filteredData,
     };
+  });
+}
+export function filterDataByFO(dataArray) {
+  const { getFo } = storeToRefs(useSrezFoStore());
+
+  if (!getFo.value || getFo.value === "Сбросить") {
+    return dataArray;
+  }
+  return dataArray.filter((item) => {
+    const itemDistrict = item.federalDistrict
+      ? item.federalDistrict.trim().toLowerCase()
+      : "";
+    const selectedDistrict = getFo.value.trim().toLowerCase();
+    return itemDistrict === selectedDistrict;
   });
 }

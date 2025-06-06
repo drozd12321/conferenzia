@@ -126,6 +126,7 @@ const chartOptions = computed(() => ({
         weight: "700",
       },
       color: "#222",
+
       padding: {
         top: 10,
         bottom: 20,
@@ -174,6 +175,7 @@ const chartOptions = computed(() => ({
                 size: 13,
               },
               color: "#666",
+              stepSize: 1,
               callback: (value) => value + "%",
             },
             title: {

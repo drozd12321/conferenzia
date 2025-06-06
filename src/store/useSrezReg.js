@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { computed, reactive, ref } from "vue";
 const useSrezRegStore = defineStore("reg", () => {
-  const reg = ref("");
+  const reg = ref("Сбросить");
   const getReg = computed(() => {
     return reg.value;
   });

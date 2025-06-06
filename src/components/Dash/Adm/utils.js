@@ -19,31 +19,29 @@ export function filterDataByYear(dataArray) {
     };
   });
 }
-export function filterDataByFO(dataArray) {
-  const { getFo } = storeToRefs(useSrezFoStore());
+export function filterDataByFO(dataArray, val) {
   console.log(dataArray);
-  if (!getFo.value || getFo.value === "Сбросить") {
+  if (!val || val === "Сбросить") {
     return dataArray;
   }
   return dataArray.filter((item) => {
     const itemDistrict = item.federalDistrict
       ? item.federalDistrict.trim().toLowerCase()
       : "";
-    const selectedDistrict = getFo.value.trim().toLowerCase();
+    const selectedDistrict = val.trim().toLowerCase();
     return itemDistrict === selectedDistrict;
   });
 }
-export function filterDataByReg(dataArray) {
-  const { getReg } = storeToRefs(useSrezRegStore());
+export function filterDataByReg(dataArray, val) {
   console.log("dataArray");
-  if (!getReg.value || getReg.value === "Сбросить") {
+  if (!val || val === "Сбросить") {
     return dataArray;
   }
   return dataArray.filter((item) => {
     const itemDistrict = item.regionName
       ? item.regionName.trim().toLowerCase()
       : "";
-    const selectedReg = getReg.value.trim().toLowerCase();
+    const selectedReg = val.trim().toLowerCase();
     return itemDistrict === selectedReg;
   });
 }

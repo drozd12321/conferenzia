@@ -9,10 +9,10 @@ import { computed, ref } from "vue";
 import useSrezYearStore from "@/store/useSrezYearsStore";
 import Srex from "./Srex.vue";
 import { items } from "../../../utils/region";
-const storeyear = useSrezYearStore();
-
+import useSrezRegStore from "@/store/useSrezReg";
+const storeReg = useSrezRegStore();
 function setYear(value) {
-  storeyear.setYear(value);
+  storeReg.setReg(value);
 }
 </script>
 <style>

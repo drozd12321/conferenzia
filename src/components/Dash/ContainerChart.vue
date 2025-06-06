@@ -81,7 +81,11 @@ import AppChartVue from "./Chart/AppChartVue.vue";
 import useDataStore from "@/store/useDataStore";
 import { computed, ref } from "vue";
 import { aggregatePercentGrowth, filterDataAgr } from "./Chart/helper";
-import { filterDataByFO, filterDataByYear } from "./Adm/utils";
+import { filterDataByFO, filterDataByReg } from "./Adm/utils";
+import useSrezFoStore from "@/store/useSrezFoStore";
+import useSrezRegStore from "@/store/useSrezReg";
+const { getFo } = storeToRefs(useSrezFoStore());
+const { getReg } = storeToRefs(useSrezRegStore());
 const { getData } = storeToRefs(useDataStore());
 const dataAll = computed(() => getData.value);
 function prepareChartsData(data) {
@@ -120,9 +124,10 @@ function prepareChartsData(data) {
 }
 const chartsData = ref(prepareChartsData(dataAll.value));
 const filteredChartsData = computed(() => {
-  return filterDataByFO(chartsData.value).filter(
-    (n) => n && n.selectedFactor !== "undefined"
-  );
+  return filterDataByReg(
+    filterDataByFO(chartsData.value, getFo.value),
+    getReg.value
+  ).filter((n) => n && n.selectedFactor !== "undefined");
 });
 const agrData = computed(() =>
   aggregatePercentGrowth(filteredChartsData.value)

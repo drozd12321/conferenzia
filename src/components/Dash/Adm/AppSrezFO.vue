@@ -4,13 +4,15 @@
 </template>
 
 <script setup>
-import { Menu } from "primevue";
 import { computed, ref } from "vue";
 import useSrezFoStore from "@/store/useSrezFoStore";
 import { storeToRefs } from "pinia";
 import Srex from "./Srex.vue";
+import useSrezRegStore from "@/store/useSrezReg";
 const storeFO = useSrezFoStore();
 const { getFo } = storeToRefs(useSrezFoStore());
+const { getReg } = storeToRefs(useSrezRegStore());
+const storeReg = useSrezRegStore();
 const items = ref([
   { label: "Сбросить" },
   { label: "СЗФО " },
@@ -24,6 +26,7 @@ const items = ref([
 ]);
 function setFO(value) {
   storeFO.setFo(value);
+  storeReg.setReg({ label: "Сбросить", fo: "" });
 }
 </script>
 

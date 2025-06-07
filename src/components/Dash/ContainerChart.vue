@@ -125,8 +125,8 @@ function prepareChartsData(data) {
 const chartsData = ref(prepareChartsData(dataAll.value));
 const filteredChartsData = computed(() => {
   return filterDataByReg(
-    filterDataByFO(chartsData.value, getFo.value),
-    getReg.value
+    filterDataByFO(chartsData.value, getFo.value.label),
+    getReg.value.label
   ).filter((n) => n && n.selectedFactor !== "undefined");
 });
 const agrData = computed(() =>

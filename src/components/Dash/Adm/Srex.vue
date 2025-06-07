@@ -4,7 +4,7 @@
       v-for="n in items"
       class="p-1 cursor-pointer"
       :class="{ 'active-menu-item': active === n.label }"
-      @click="onselect(n.label)"
+      @click="onselect(n)"
     >
       <h2>{{ n.label }}</h2>
     </div>
@@ -21,12 +21,13 @@ const props = defineProps({
 const emit = defineEmits(["year"]);
 const active = ref("Сбросить");
 const onselect = (value) => {
-  active.value = value;
+  active.value = value.label;
   emit("year", value);
 };
 </script>
 <style scoped>
 .menu {
+  min-height: 350px;
   max-height: 350px; /* или любое нужное значение */
   overflow-y: auto;
 }

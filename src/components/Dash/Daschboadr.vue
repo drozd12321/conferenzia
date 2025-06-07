@@ -1,6 +1,6 @@
 <template>
   <div class="w-full" v-if="getData">
-    <div class="adm"><AppSrez /></div>
+    <div class="w-1/5"><AppSrez /></div>
     <div class="chart"><ContainerChart /></div>
   </div>
   <div v-else class="empty-state">
@@ -40,7 +40,8 @@ function gotoUpload() {
 .w-full {
   width: 95%;
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
+
   height: 80vh;
 }
 
@@ -49,13 +50,9 @@ function gotoUpload() {
   position: sticky;
   top: 180px;
   align-self: flex-start;
-  width: 300px;
+  width: 400px;
 
   overflow-y: auto;
-}
-
-.chart {
-  flex: 1.2;
 }
 
 .upload-icon {

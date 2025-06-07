@@ -4,9 +4,7 @@
 </template>
 
 <script setup>
-import { Menu } from "primevue";
 import { computed, ref } from "vue";
-import useSrezYearStore from "@/store/useSrezYearsStore";
 import Srex from "./Srex.vue";
 import { items } from "../../../utils/region";
 import useSrezRegStore from "@/store/useSrezReg";
@@ -18,14 +16,14 @@ function setYear(value) {
   storeReg.setReg(value);
 }
 const filteredItems = computed(() => {
-  if (!getFo.value || getFo.value === "Сбросить") {
+  if (!getFo.value || getFo.value.label === "Сбросить") {
     return items.value; // показываем все, если не выбран округ
   }
   return items.value.filter((item) => {
     console.log(item[0]);
     return (
       item.fo &&
-      item.fo.trim().toLowerCase() === getFo.value.trim().toLowerCase()
+      item.fo.trim().toLowerCase() === getFo.value.label.trim().toLowerCase()
     );
   });
 });
